@@ -4,10 +4,8 @@ import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH, START_LOADING
 export const getJobs = () => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    const { data } = await api.fetchJobs(); //response=data object
+    const { data } = await api.fetchJobs();
     dispatch({ type: FETCH_ALL, payload: data });
-    // const action = { type: 'FETCH_ALL', payload: [] };
-    // dispatch (action);
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
