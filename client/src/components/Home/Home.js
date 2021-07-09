@@ -10,6 +10,7 @@ import { getJobs, getJobsBySearch } from "../../actions/jobs";
 import useStyles from "./styles";
 import Jobs from "../Jobs/jobs";
 import Form from "../Form/form";
+import Filter from "../Filter/Filter";
 
 const Home = () => {
   const [currentId, setCurrentId] = useState(null);
@@ -40,7 +41,10 @@ const Home = () => {
         <Form openPopup={openPopup} currentId={currentId} setOpenPopup={setOpenPopup} setCurrentId={setCurrentId} />
         <Container>
           <Grid className={classes.gridContainer} container justify="center" alignItems="stretch" spacing={3}>
-            <Grid item xs={12} sm={12} md={12} lg={8}>
+            <Grid item xs={12} sm={12} md={12} lg={4}>
+              <Filter />
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} lg={7}>
               <Jobs setCurrentId={setCurrentId} setOpenPopup={setOpenPopup} />
             </Grid>
           </Grid>

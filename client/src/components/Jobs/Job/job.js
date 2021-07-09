@@ -61,6 +61,12 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
             {job.salary}
           </Typography>
           <Typography variant="h6" className={classes.title}>
+            {job.Location.City}
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
+            {job.Location.State}
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
             {job.duration}
           </Typography>
           <Typography variant="h6" className={classes.title}>
