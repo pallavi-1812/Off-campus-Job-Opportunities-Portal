@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Grid, Button, Typography } from "@material-ui/core";
+import { TextField, Grid, Button, Typography, IconButton } from "@material-ui/core";
 import { Dialog, DialogTitle, DialogContent } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { data } from '../../resources/cityData';
+import { data } from "../../resources/cityData";
 import { jobs } from "../../resources/jobData";
 import { states } from "../../resources/stateData";
 import Select from "../Controls/Select";
@@ -81,7 +81,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
           <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center" }}>
             {currentId ? `Editing ${job.jobTitle}` : "Creating Job Post"}
           </Typography>
-          <Button
+          <IconButton
             className={classes.root1}
             color="secondary"
             onClick={() => {
@@ -90,53 +90,49 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
             }}
           >
             <CloseIcon />
-          </Button>
+          </IconButton>
         </div>
       </DialogTitle>
       <DialogContent dividers>
         <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
           <>
             <Grid container alignItems="stretch" spacing={1}>
-              <Grid item sm={12} md={6}>
-                <Select
-                  name="jobTitle"
-                  label="Job Title"
-                  options={jobs}
-                  value={jobData.jobTitle}
-                  onChange={(e) => setJobData({ ...jobData, jobTitle: e.target.value })}
-                />
+              <Grid item xs={12} sm={12} md={6}>
+                <Select name="jobTitle" label="Job Title" options={jobs} value={jobData.jobTitle} onChange={(e) => setJobData({ ...jobData, jobTitle: e.target.value })} />
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={12} md={6}>
                 <TextField name="jobType" variant="outlined" label="Job Type" fullWidth value={jobData.jobType} onChange={(e) => setJobData({ ...jobData, jobType: e.target.value })} />
               </Grid>
             </Grid>
             <Grid container alignItems="stretch" spacing={1}>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={12} md={6}>
                 <TextField name="salary" variant="outlined" label="Salary" fullWidth rows={4} value={jobData.salary} onChange={(e) => setJobData({ ...jobData, salary: e.target.value })} />
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={12} md={6}>
                 <TextField name="duration" variant="outlined" label="Duration" fullWidth rows={4} value={jobData.duration} onChange={(e) => setJobData({ ...jobData, duration: e.target.value })} />
               </Grid>
             </Grid>
             <Grid container alignItems="stretch" spacing={1}>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={12} md={6}>
                 <TextField name="company" variant="outlined" label="Company" fullWidth rows={4} value={jobData.company} onChange={(e) => setJobData({ ...jobData, company: e.target.value })} />
               </Grid>
-              <Grid item sm={12} md={6}>
-                <TextField name="applyLink" variant="outlined" label="Apply Link" fullWidth rows={4} value={jobData.applyLink} onChange={(e) => setJobData({ ...jobData, applyLink: e.target.value })} />
+              <Grid item xs={12} sm={12} md={6}>
+                <TextField
+                  name="applyLink"
+                  variant="outlined"
+                  label="Apply Link"
+                  fullWidth
+                  rows={4}
+                  value={jobData.applyLink}
+                  onChange={(e) => setJobData({ ...jobData, applyLink: e.target.value })}
+                />
               </Grid>
             </Grid>
             <Grid container alignItems="stretch" spacing={1}>
-              <Grid item sm={12} md={6}>
-                <Select
-                  name="City"
-                  label="City"
-                  options={data}
-                  value={jobData.Location.City}
-                  onChange={(e) => setJobData({ ...jobData, Location: { ...jobData.Location, City: e.target.value } })}
-                />
+              <Grid item xs={12} sm={12} md={6}>
+                <Select name="City" label="City" options={data} value={jobData.Location.City} onChange={(e) => setJobData({ ...jobData, Location: { ...jobData.Location, City: e.target.value } })} />
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={12} md={6}>
                 <Select
                   name="State"
                   label="State"
@@ -201,7 +197,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
           </>
         </form>
       </DialogContent>
-    </Dialog >
+    </Dialog>
   );
 };
 export default Form;
