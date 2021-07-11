@@ -142,7 +142,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                 />
               </Grid>
             </Grid>
-            <Grid xs={12} sm={12} md={12} lg={12} className={classes.fullGrid}>
+            <Grid item xs={12} sm={12} md={12} lg={12} className={classes.fullGrid}>
               <TextField
                 name="Info"
                 variant="outlined"

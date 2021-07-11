@@ -50,7 +50,7 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
     <Card className={classes.card} raised elevation={6}>
       <div className={classes.details}>
         <CardContent>
-          <Typography variant="p">{moment(job.createdAt).fromNow()}</Typography>
+          <Typography component="p">{moment(job.createdAt).fromNow()}</Typography>
           <Typography variant="h6" className={classes.title}>
             {job.jobTitle}
           </Typography>

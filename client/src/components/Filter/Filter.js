@@ -17,11 +17,11 @@ const Filter = () => {
   });
   const [month, setMonth] = useState("");
   const [job, setJob] = useState("");
-  console.log(data);
+
   data.sort(function (a, b) {
     return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
   });
-  console.log(data);
+
   const classes = useStyles();
   return (
     <Grid className={classes.filterDiv}>
