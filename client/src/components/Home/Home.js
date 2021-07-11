@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Container, Grow, Grid, Paper, AppBar, TextField, Button, Toolbar, Tab, Tabs, Box, Typography } from "@material-ui/core";
+import { Container, Grow, Grid, Paper, AppBar, TextField, Button, Toolbar, Box, Typography, Fab } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
+import AddIcon from "@material-ui/icons/Add";
 import Controls from "../Controls/Controls";
 
 import { getJobs, getJobsBySearch } from "../../actions/jobs";
@@ -29,28 +30,24 @@ const Home = () => {
     dispatch(getJobs());
   }, [currentId, dispatch]);
   return (
-    <Grow in>
-      <Container maxWidth="xl">
-        {user?.result?.role === "1" && (
-          <Toolbar>
-            <Button variant="outlined" color="primary" style={{ position: "absolute", right: "10px" }} onClick={() => setOpenPopup(true)}>
-              Add New
-            </Button>
-          </Toolbar>
-        )}
-        <Form openPopup={openPopup} currentId={currentId} setOpenPopup={setOpenPopup} setCurrentId={setCurrentId} />
-        <Container>
-          <Grid className={classes.gridContainer} container justify="center" alignItems="stretch" spacing={3}>
-            <Grid item xs={12} sm={12} md={12} lg={4}>
-              <Filter />
-            </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={7}>
-              <Jobs setCurrentId={setCurrentId} setOpenPopup={setOpenPopup} />
-            </Grid>
+    <>
+      {user?.result?.role === "1" && (
+        <Fab size="medium" color="primary" style={{ position: "absolute", right: "10px", zIndex: "100" }} onClick={() => setOpenPopup(true)}>
+          <AddIcon />
+        </Fab>
+      )}
+      <Form openPopup={openPopup} currentId={currentId} setOpenPopup={setOpenPopup} setCurrentId={setCurrentId} />
+      <Grid className={classes.gridContainer} container justify="space-between" alignItems="stretch" spacing={3}>
+        <Grid item xs={12} sm={12} md={12} lg={3}>
+          <Filter />
+        </Grid>
+        <Container maxWidth="md">
+          <Grid item xs={12} sm={12} md={12} lg={12}>
+            <Jobs setCurrentId={setCurrentId} setOpenPopup={setOpenPopup} />
           </Grid>
         </Container>
-      </Container>
-    </Grow>
+      </Grid>
+    </>
   );
 };
 

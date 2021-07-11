@@ -7,6 +7,10 @@ export default makeStyles((theme) => ({
     display: "flex",
     padding: "10px",
   },
+  root1: {
+    minWidth: 0,
+    margin: theme.spacing(0.1),
+  },
   pagination: {
     borderRadius: 4,
     marginTop: "1rem",
