@@ -1,15 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
-    locationDiv: {
+    itemDiv: {
         width: '90%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        height: '100%',
-        justifyContent: 'center'
-    },
-    postedByGrid: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
