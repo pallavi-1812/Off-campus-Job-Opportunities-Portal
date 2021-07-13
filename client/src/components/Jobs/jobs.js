@@ -8,7 +8,7 @@ import useStyles from "./styles";
 const Jobs = ({ setCurrentId, setOpenPopup }) => {
   const { jobs, isLoading } = useSelector((state) => state.jobs);
   const classes = useStyles();
-
+  console.log(jobs);
   if (!jobs.length && !isLoading) return "No Posts";
   return isLoading ? (
     <CircularProgress />

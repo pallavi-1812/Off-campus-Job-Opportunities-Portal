@@ -41,7 +41,6 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
       </>
     );
   };
-
   const handleClick = () => {
     setCurrentId(job._id);
     setOpenPopup(true);
@@ -55,7 +54,7 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
             {job.jobTitle}
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            {job.jobType}
+            {job.jobType && job.jobType.map((type) => type.name)}
           </Typography>
           <Typography variant="h6" className={classes.title}>
             {job.salary}
@@ -74,6 +73,9 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
           </Typography>
           <Typography variant="h6" className={classes.title}>
             {job.company}
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
+            {job.startDate}
           </Typography>
         </CardContent>
       </div>
