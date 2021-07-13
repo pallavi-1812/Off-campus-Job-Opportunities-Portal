@@ -15,7 +15,7 @@ const locationSchema = mongoose.Schema({
 
 const postSchema = mongoose.Schema({
   jobTitle: String,
-  jobType: String,
+  jobType: Array,
   postedBy: String,
   duration: String,
   salary: String,
@@ -28,6 +28,9 @@ const postSchema = mongoose.Schema({
   Location: {
     type: { locationSchema },
     default: {},
+  },
+  startDate: {
+    type: Date,
   },
   createdAt: {
     type: Date,
