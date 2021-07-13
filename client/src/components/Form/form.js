@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Grid, Button, Typography, IconButton } from "@material-ui/core";
 import { Dialog, DialogTitle, DialogContent } from "@material-ui/core";
+import { Autocomplete } from "@material-ui/lab";
 import CloseIcon from "@material-ui/icons/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { data } from "../../resources/cityData";
 import { jobs } from "../../resources/jobData";
 import { states } from "../../resources/stateData";
-import Select from "../Controls/Select";
+import DatePicker from "../Controls/DatePicker";
+import { jobTypeData } from "../../resources/jobTypeData";
 import useStyles from "./styles";
+import { withStyles } from "@material-ui/core/styles";
 import { createJob, updateJob } from "../../actions/jobs";
 
 const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
   const [jobData, setJobData] = useState({
     jobTitle: "",
-    jobType: "",
+    jobType: [],
     postedBy: "TPC",
     duration: "",
     salary: "",
     company: "",
+    startDate: null,
     Location: {
       City: "",
       State: "",
@@ -44,11 +48,12 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
     setCurrentId(null);
     setJobData({
       jobTitle: "",
-      jobType: "",
+      jobType: [],
       postedBy: "TPC",
       duration: "",
       salary: "",
       company: "",
+      startDate: null,
       Location: {
         City: "",
         State: "",
@@ -62,7 +67,9 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
       applyLink: "",
     });
   };
-
+  const handleOption = (value, option) => {
+    return option.name === value.name;
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,8 +79,22 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
       dispatch(createJob(jobData, history));
     }
     clear();
-    console.log(jobData);
   };
+  const MyAutocomplete = withStyles({
+    tag: {
+      backgroundColor: "#3f50b5",
+      height: 24,
+      position: "relative",
+      zIndex: 0,
+      "& .MuiChip-label": {
+        color: "#ffffff",
+      },
+      "& .MuiChip-deleteIcon": {
+        color: "#757ce8",
+      },
+    },
+  })(Autocomplete);
+  console.log(jobData);
   return (
     <Dialog open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
       <DialogTitle className={classes.dialogTitle}>
@@ -98,52 +119,137 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
           <>
             <Grid container alignItems="stretch" spacing={1}>
               <Grid item xs={12} sm={12} md={6}>
-                <Select name="jobTitle" label="Job Title" options={jobs} value={jobData.jobTitle} onChange={(e) => setJobData({ ...jobData, jobTitle: e.target.value })} />
-              </Grid>
-              <Grid item xs={12} sm={12} md={6}>
-                <TextField name="jobType" variant="outlined" label="Job Type" fullWidth value={jobData.jobType} onChange={(e) => setJobData({ ...jobData, jobType: e.target.value })} />
-              </Grid>
-            </Grid>
-            <Grid container alignItems="stretch" spacing={1}>
-              <Grid item xs={12} sm={12} md={6}>
-                <TextField name="salary" variant="outlined" label="Salary" fullWidth rows={4} value={jobData.salary} onChange={(e) => setJobData({ ...jobData, salary: e.target.value })} />
-              </Grid>
-              <Grid item xs={12} sm={12} md={6}>
-                <TextField name="duration" variant="outlined" label="Duration" fullWidth rows={4} value={jobData.duration} onChange={(e) => setJobData({ ...jobData, duration: e.target.value })} />
-              </Grid>
-            </Grid>
-            <Grid container alignItems="stretch" spacing={1}>
-              <Grid item xs={12} sm={12} md={6}>
-                <TextField name="company" variant="outlined" label="Company" fullWidth rows={4} value={jobData.company} onChange={(e) => setJobData({ ...jobData, company: e.target.value })} />
-              </Grid>
-              <Grid item xs={12} sm={12} md={6}>
-                <TextField
-                  name="applyLink"
-                  variant="outlined"
-                  label="Apply Link"
+                <Autocomplete
+                  size="small"
                   fullWidth
-                  rows={4}
-                  value={jobData.applyLink}
-                  onChange={(e) => setJobData({ ...jobData, applyLink: e.target.value })}
+                  id="jobtitle"
+                  filterSelectedOptions
+                  inputValue={jobData.jobTitle ? jobData.jobTitle : ""}
+                  options={jobs}
+                  getOptionSelected={(option, value) => option.name === value.name}
+                  getOptionLabel={(option) => (option.name ? option.name : "")}
+                  groupBy={(option) => option.firstLetter}
+                  onChange={(e, v) => {
+                    if (v == null) setJobData({ ...jobData, jobTitle: "" });
+                    else setJobData({ ...jobData, jobTitle: v.name });
+                    console.log(jobData.jobTitle);
+                  }}
+                  renderInput={(params) => (
+                    <TextField {...params} onChange={({ target }) => setJobData({ ...jobData, jobTitle: target.value })} variant="outlined" name="jobProfile" label="Job Profile" />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <MyAutocomplete
+                  fullWidth
+                  size="small"
+                  multiple
+                  id="jobtypes"
+                  value={jobData.jobType || []}
+                  filterSelectedOptions
+                  options={jobTypeData}
+                  getOptionLabel={(option) => (option.name ? option.name : "")}
+                  getOptionSelected={(option, value) => handleOption(value, option)}
+                  onChange={(e, v) => {
+                    if (v == null) setJobData({ ...jobData, jobType: [] });
+                    else setJobData({ ...jobData, jobType: v });
+                  }}
+                  renderInput={(params) => <TextField {...params} onChange={({ target }) => setJobData({ ...jobData, jobType: target.value })} variant="outlined" name="jobType" label="Job Type" />}
                 />
               </Grid>
             </Grid>
             <Grid container alignItems="stretch" spacing={1}>
               <Grid item xs={12} sm={12} md={6}>
-                <Select name="City" label="City" options={data} value={jobData.Location.City} onChange={(e) => setJobData({ ...jobData, Location: { ...jobData.Location, City: e.target.value } })} />
+                <TextField
+                  size="small"
+                  name="salary"
+                  variant="outlined"
+                  label="Salary"
+                  fullWidth
+                  rows={4}
+                  value={jobData.salary}
+                  onChange={(e) => setJobData({ ...jobData, salary: e.target.value })}
+                />
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
-                <Select
-                  name="State"
-                  label="State"
+                <TextField
+                  size="small"
+                  name="duration"
+                  variant="outlined"
+                  label="Duration"
+                  fullWidth
+                  rows={4}
+                  value={jobData.duration}
+                  onChange={(e) => setJobData({ ...jobData, duration: e.target.value })}
+                />
+              </Grid>
+            </Grid>
+            <Grid container alignItems="stretch" spacing={1}>
+              <Grid item xs={12} sm={12} md={6}>
+                <TextField
+                  size="small"
+                  name="company"
+                  variant="outlined"
+                  label="Company"
+                  fullWidth
+                  rows={4}
+                  value={jobData.company}
+                  onChange={(e) => setJobData({ ...jobData, company: e.target.value })}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <DatePicker name="Start Date" label="Start Date" value={jobData.startDate} onChange={(e) => setJobData({ ...jobData, startDate: e.target.value })} />
+              </Grid>
+            </Grid>
+            <Grid container alignItems="stretch" spacing={1}>
+              <Grid item xs={12} sm={12} md={6}>
+                <Autocomplete
+                  size="small"
+                  fullWidth
+                  id="city"
+                  filterSelectedOptions
+                  inputValue={jobData.Location.City ? jobData.Location.City : ""}
+                  options={data}
+                  getOptionLabel={(option) => (option.name ? option.name : "")}
+                  getOptionSelected={(option, value) => option.name === value.name}
+                  onChange={(e, v) => {
+                    if (v == null) setJobData({ ...jobData, Location: { ...jobData.Location, City: "" } });
+                    else setJobData({ ...jobData, Location: { ...jobData.Location, City: v.name } });
+                  }}
+                  renderInput={(params) => (
+                    <TextField {...params} onChange={({ target }) => setJobData({ ...jobData, Location: { ...jobData.Location, City: target.value } })} variant="outlined" name="City" label="City" />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <Autocomplete
+                  size="small"
+                  fullWidth
+                  id="state"
+                  filterSelectedOptions
+                  inputValue={jobData.Location.State ? jobData.Location.State : ""}
                   options={states}
-                  value={jobData.Location.State}
-                  onChange={(e) => setJobData({ ...jobData, Location: { ...jobData.Location, State: e.target.value } })}
+                  getOptionLabel={(option) => (option.name ? option.name : "")}
+                  getOptionSelected={(option, value) => option.name === value.name}
+                  onChange={(e, v) => {
+                    if (v == null) setJobData({ ...jobData, Location: { ...jobData.Location, State: "" } });
+                    else setJobData({ ...jobData, Location: { ...jobData.Location, State: v.name } });
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      onChange={({ target }) => setJobData({ ...jobData, Location: { ...jobData.Location, State: target.value } })}
+                      variant="outlined"
+                      name="State"
+                      label="State"
+                    />
+                  )}
                 />
               </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12} className={classes.fullGrid}>
               <TextField
+                size="small"
                 name="Info"
                 variant="outlined"
                 label="Information"
@@ -154,6 +260,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                 onChange={(e) => setJobData({ ...jobData, description: { ...jobData.description, Info: e.target.value } })}
               />
               <TextField
+                size="small"
                 name="ReqSkills"
                 variant="outlined"
                 label="Skills Required"
@@ -164,6 +271,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                 onChange={(e) => setJobData({ ...jobData, description: { ...jobData.description, ReqSkills: e.target.value } })}
               />
               <TextField
+                size="small"
                 name="Rewards"
                 variant="outlined"
                 label="Rewards"
@@ -174,6 +282,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                 onChange={(e) => setJobData({ ...jobData, description: { ...jobData.description, Rewards: e.target.value } })}
               />
               <TextField
+                size="small"
                 name="Eligibility"
                 variant="outlined"
                 label="Eligibility"
@@ -183,16 +292,28 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                 value={jobData.description.Eligibility}
                 onChange={(e) => setJobData({ ...jobData, description: { ...jobData.description, Eligibility: e.target.value } })}
               />
+              <TextField
+                size="small"
+                name="applyLink"
+                variant="outlined"
+                label="Apply Link"
+                fullWidth
+                rows={4}
+                value={jobData.applyLink}
+                onChange={(e) => setJobData({ ...jobData, applyLink: e.target.value })}
+              />
             </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-              <Button className={classes.buttonSubmit} variant="contained" color="primary" size="small" type="submit" fullWidth>
-                Submit
-              </Button>
-            </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-              <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>
-                Clear
-              </Button>
+            <Grid container alignItems="stretch" spacing={1}>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <Button className={classes.buttonSubmit} variant="contained" color="primary" size="small" type="submit" fullWidth>
+                  Submit
+                </Button>
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>
+                  Clear
+                </Button>
+              </Grid>
             </Grid>
           </>
         </form>

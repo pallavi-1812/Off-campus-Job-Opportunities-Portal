@@ -23,7 +23,7 @@ export default makeStyles((theme) => ({
     margin: "10px 0",
   },
   fullGrid: {
-    marginTop: 10
+    marginTop: 0,
   },
   buttonSubmit: {
     marginBottom: 10,
