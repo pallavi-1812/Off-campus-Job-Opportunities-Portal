@@ -8,7 +8,6 @@ export default makeStyles((theme) => ({
   },
   root1: {
     minWidth: 0,
-    padding: 0,
     margin: theme.spacing(0.1),
   },
   paper: {

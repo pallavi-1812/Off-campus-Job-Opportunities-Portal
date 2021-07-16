@@ -13,6 +13,7 @@ import { jobTypeData } from "../../resources/jobTypeData";
 import useStyles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 import { createJob, updateJob } from "../../actions/jobs";
+import Job from "./../Jobs/Job/job";
 
 const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
   const [jobData, setJobData] = useState({
@@ -101,18 +102,20 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
         <Grid item xs={12} sm={12} md={6}>
           <DialogTitle className={classes.dialogTitle}>
             <div style={{ display: "flex" }}>
-              <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center" }}>
+              <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center", padding: "8.75px" }}>
                 Preview
               </Typography>
             </div>
           </DialogTitle>
-          <DialogContent dividers>job</DialogContent>
+          <DialogContent dividers>
+            <Job job={jobData} />
+          </DialogContent>
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
           <DialogTitle className={classes.dialogTitle}>
             <div style={{ display: "flex" }}>
               <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center" }}>
-                {currentId ? `Editing ${job.jobTitle}` : "Creating Job Post"}
+                {currentId ? `Editing ${jobData.jobTitle}` : "Creating Job Post"}
               </Typography>
               <IconButton
                 className={classes.root1}
@@ -212,7 +215,20 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                     />
                   </Grid>
                   <Grid item xs={12} sm={12} md={6}>
-                    <DatePicker name="Start Date" label="Start Date" value={jobData.startDate} onChange={(e) => setJobData({ ...jobData, startDate: e.target.value })} />
+                    <DatePicker
+                      name="Start Date"
+                      label="Start Date"
+                      value={jobData.startDate}
+                      onChange={(e) => {
+                        try {
+                          if (e.target.value === null) setJobData({ ...jobData, startDate: null });
+                          else if (e.target.value === "Invalid Date" || e.target.value === "Invalid time value") setJobData({ ...jobData, startDate: e.target.value });
+                          else setJobData({ ...jobData, startDate: e.target.value.toString() });
+                        } catch {
+                          setJobData({ ...jobData, startDate: e.target.value });
+                        }
+                      }}
+                    />
                   </Grid>
                 </Grid>
                 <Grid container alignItems="stretch" spacing={1}>

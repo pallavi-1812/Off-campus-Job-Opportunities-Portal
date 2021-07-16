@@ -54,7 +54,12 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
             {job.jobTitle}
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            {job.jobType && job.jobType.map((type) => type.name)}
+            {job.jobType &&
+              job.jobType.map
+                .call(job.jobType, function (item) {
+                  return item.name;
+                })
+                .join(", ")}
           </Typography>
           <Typography variant="h6" className={classes.title}>
             {job.salary}
@@ -75,34 +80,61 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
             {job.company}
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            {job.startDate}
+            {job.startDate && job.startDate.substring(0, 15)}
           </Typography>
         </CardContent>
       </div>
-      <CardActions className={classes.cardActions}>
-        <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
-          <Likes />
-        </IconButton>
-        {user?.result?.role === "1" && (
-          <IconButton className={classes.expand} color="primary" onClick={handleClick}>
-            <EditIcon fontSize="small" />
+      {job._id ? (
+        <CardActions className={classes.cardActions}>
+          <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
+            <Likes />
           </IconButton>
-        )}
-        {user?.result?.role === "1" && (
-          <IconButton className={classes.expand} color="secondary" onClick={() => dispatch(deleteJob(job._id))}>
-            <DeleteIcon fontSize="small" />
+          {user?.result?.role === "1" && (
+            <IconButton className={classes.expand} color="primary" onClick={handleClick}>
+              <EditIcon fontSize="small" />
+            </IconButton>
+          )}
+          {user?.result?.role === "1" && (
+            <IconButton className={classes.expand} color="secondary" onClick={() => dispatch(deleteJob(job._id))}>
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          )}
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+          >
+            <ExpandMoreIcon fontSize="small" />
           </IconButton>
-        )}
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-        >
-          <ExpandMoreIcon fontSize="small" />
-        </IconButton>
-      </CardActions>
+        </CardActions>
+      ) : (
+        <CardActions className={classes.cardActions}>
+          <IconButton className={classes.expand} color="secondary" disabled={!user?.result}>
+            <Likes />
+          </IconButton>
+          {user?.result?.role === "1" && (
+            <IconButton className={classes.expand} color="primary">
+              <EditIcon fontSize="small" />
+            </IconButton>
+          )}
+          {user?.result?.role === "1" && (
+            <IconButton className={classes.expand} color="secondary">
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          )}
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+          >
+            <ExpandMoreIcon fontSize="small" />
+          </IconButton>
+        </CardActions>
+      )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Divider />
         <CardContent>
