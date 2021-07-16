@@ -45,7 +45,6 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
     setCurrentId(job._id);
     setOpenPopup(true);
   };
-  console.log(openPopup);
   return (
     <Card className={classes.card} raised elevation={6}>
       <div className={classes.details}>
