@@ -65,7 +65,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
             {job.salary}
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            {job.Location.City && job.Location.State ? Object.values(job.Location).join(", ") : ""}
+            {job.Location.City && job.Location.State ? Object.values(job.Location).join(", ") : (job.Location.City ? job.Location.City : "") || (job.Location.State ? job.Location.State : "")}
           </Typography>
           <Typography variant="h6" className={classes.title}>
             {job.duration}
