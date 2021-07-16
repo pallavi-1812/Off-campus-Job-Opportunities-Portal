@@ -8,6 +8,7 @@ export default makeStyles((theme) => ({
   },
   root1: {
     minWidth: 0,
+    padding: 0,
     margin: theme.spacing(0.1),
   },
   paper: {
@@ -33,7 +34,8 @@ export default makeStyles((theme) => ({
     paddingRight: theme.spacing(2),
     paddingLeft: theme.spacing(2),
     position: "absolute",
-    top: theme.spacing(5),
+    maxHeight: "90vh",
+    top: theme.spacing(2),
   },
   dialogTitle: {
     paddingRight: theme.spacing(1),
