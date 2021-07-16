@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import { getJob, likeJob, deleteJob } from "../../../actions/jobs";
 import useStyles from "./styles";
 
-const Job = ({ job, setCurrentId, setOpenPopup }) => {
+const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
@@ -45,6 +45,7 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
     setCurrentId(job._id);
     setOpenPopup(true);
   };
+  console.log(openPopup);
   return (
     <Card className={classes.card} raised elevation={6}>
       <div className={classes.details}>
@@ -65,16 +66,10 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
             {job.salary}
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            {job.Location.City}
-          </Typography>
-          <Typography variant="h6" className={classes.title}>
-            {job.Location.State}
+            {job.Location.City && job.Location.State ? Object.values(job.Location).join(", ") : ""}
           </Typography>
           <Typography variant="h6" className={classes.title}>
             {job.duration}
-          </Typography>
-          <Typography variant="h6" className={classes.title}>
-            {job.applyLink}
           </Typography>
           <Typography variant="h6" className={classes.title}>
             {job.company}
@@ -84,7 +79,7 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
           </Typography>
         </CardContent>
       </div>
-      {job._id ? (
+      {openPopup === false ? (
         <CardActions className={classes.cardActions}>
           <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
             <Likes />
@@ -99,6 +94,9 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
               <DeleteIcon fontSize="small" />
             </IconButton>
           )}
+          <Button className={classes.expand} color="secondary" href={job.applyLink}>
+            Apply
+          </Button>
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
@@ -124,6 +122,9 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
               <DeleteIcon fontSize="small" />
             </IconButton>
           )}
+          <Button className={classes.expand} color="secondary">
+            Apply
+          </Button>
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,

@@ -43,7 +43,7 @@ const Home = () => {
         </Grid>
         <Container maxWidth="md">
           <Grid item xs={12} sm={12} md={12} lg={12}>
-            <Jobs setCurrentId={setCurrentId} setOpenPopup={setOpenPopup} />
+            <Jobs setCurrentId={setCurrentId} openPopup={openPopup} setOpenPopup={setOpenPopup} />
           </Grid>
         </Container>
       </Grid>
