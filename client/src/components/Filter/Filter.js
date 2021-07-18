@@ -34,14 +34,10 @@ const Filter = () => {
 
   const [internBool, setInternBool] = useState(true);
 
-  // useEffect(() => {
-  //   if (filters.jobType?.length) handleFilter();
-  //   else 
-  // }, [filters.jobType?.length]);
-
   useEffect(() => {
-    if (filters.jobType.length || filters.jobTitle || filters.location.City || filters.location.State) handleFilter();
-    else if (filters.jobType == [] && (filters.jobTitle || filters.location.City || filters.location.State)) handleFilter();
+    if (filters.location.City == '' && filters.location.State == '' && filters.jobTitle == '' && filters.jobType.length === 0) {
+      dispatch(getJobs());
+    } else if (filters.jobType.length || filters.jobTitle || filters.location.City || filters.location.State) handleFilter();
   }, [filters.jobType.length, filters.jobTitle, filters.location.City, filters.location.State])
 
   data.sort(function (a, b) {
