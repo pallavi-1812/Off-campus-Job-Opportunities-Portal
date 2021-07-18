@@ -10,6 +10,17 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getPostsBySearch = async (req, res) => {
+  const { jobTitle, jobType, state, city } = req.query;
+  try {
+    // const title = new RegExp(searchQuery, 'i'); //i.e. Test, test, TEST -> same
+    const posts = await PostMessage.find({ $or: [{ jobTitle }, { "Location.State": state }, { "Location.City": city }, { jobType: { $in: jobType.split(',') } }] });
+    res.status(200).json({ data: posts });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
 export const createPosts = async (req, res) => {
   const post = req.body;
   const newPost = new PostMessage({ ...post, createdAt: new Date().toISOString() });

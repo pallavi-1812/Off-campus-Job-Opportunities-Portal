@@ -10,7 +10,7 @@ API.interceptors.request.use((req) => {
 });
 
 export const fetchJobs = () => API.get(`/jobs`);
-export const fetchJobsBySearch = (searchQuery) => API.get(`/jobs/search?searchQuery=${searchQuery.search || "none"}&tags=${searchQuery.tags}`);
+export const fetchJobsBySearch = (searchQuery) => API.get(`/jobs/search?jobType=${searchQuery.jobType}&jobTitle=${searchQuery.jobTitle || "none"}&state=${searchQuery.state || "none"}&city=${searchQuery.city || "none"}`);
 export const createJob = (newJob) => API.post("/jobs", newJob);
 export const likeJob = (id) => API.patch(`/jobs/${id}/likeJob`);
 export const updateJob = (id, updatedJob) => API.patch(`/jobs/${id}`, updatedJob);

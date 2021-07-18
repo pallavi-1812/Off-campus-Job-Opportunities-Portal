@@ -15,6 +15,7 @@ const App = () => {
       <Switch>
         <Route path="/" exact component={() => <Redirect to="/jobs" />} />
         <Route path="/jobs" exact component={Home} />
+        <Route path="/jobs/search" exact component={Home} />
         <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/jobs" />)} />
         <Route path="/auth" exact component={Auth} />
       </Switch>

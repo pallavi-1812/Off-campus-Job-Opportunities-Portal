@@ -10,12 +10,11 @@ const jobDescSchema = mongoose.Schema({
 const locationSchema = mongoose.Schema({
   City: String,
   State: String,
-  Country: String,
 });
 
 const postSchema = mongoose.Schema({
   jobTitle: String,
-  jobType: Array,
+  jobType: [String],
   postedBy: String,
   duration: String,
   salary: String,

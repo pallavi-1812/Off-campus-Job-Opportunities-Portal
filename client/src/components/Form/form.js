@@ -39,7 +39,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
-  const user = JSON.parse(localStorage.getItem("profile"));
+
   useEffect(() => {
     if (job) setJobData(job);
   }, [job, dispatch]);
@@ -67,9 +67,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
       applyLink: "",
     });
   };
-  const handleOption = (value, option) => {
-    return option.name === value.name;
-  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -94,7 +92,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
       },
     },
   })(Autocomplete);
-  console.log(jobData);
+
   return (
     <Dialog open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
       <DialogTitle className={classes.dialogTitle}>
@@ -148,8 +146,8 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                   value={jobData.jobType || []}
                   filterSelectedOptions
                   options={jobTypeData}
-                  getOptionLabel={(option) => (option.name ? option.name : "")}
-                  getOptionSelected={(option, value) => handleOption(value, option)}
+                  getOptionLabel={(option) => (option ? option : "")}
+                  getOptionSelected={(option, value) => option === value}
                   onChange={(e, v) => {
                     if (v == null) setJobData({ ...jobData, jobType: [] });
                     else setJobData({ ...jobData, jobType: v });

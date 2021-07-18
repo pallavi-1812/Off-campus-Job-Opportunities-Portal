@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useHistory } from "react-router";
 import { data } from "../../resources/cityData";
 import { jobTypeData } from "../../resources/jobTypeData";
 import { postedByData } from "../../resources/postedByData";
@@ -11,9 +12,16 @@ import { Grid, TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { withStyles } from "@material-ui/core/styles";
 import { states } from "../../resources/stateData";
+import { useDispatch } from "react-redux";
+import { getJobs, getJobsBySearch } from "../../actions/jobs";
 
 const Filter = () => {
+
+  const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
+  const location = useLocation();
+
   const [filters, setFilters] = useState({
     jobType: [],
     jobTitle: "",
@@ -25,10 +33,22 @@ const Filter = () => {
     month: "",
     startDate: null,
   });
+
   const [internBool, setInternBool] = useState(true);
+
+  useEffect(() => {
+    if (filters.jobType) {
+      handleFilter();
+    } else {
+      history.push(`${location.pathname}`);
+      dispatch(getJobs());
+    }
+  }, [filters.jobType.length, filters.jobTitle, filters.jobType, filters.location]);
+
   data.sort(function (a, b) {
     return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
   });
+
   const MyAutocomplete = withStyles({
     tag: {
       backgroundColor: "#3f50b5",
@@ -43,7 +63,21 @@ const Filter = () => {
       },
     },
   })(Autocomplete);
-  console.log(filters);
+
+  const handleFilter = () => {
+    if (filters.jobTitle || filters.jobType || filters.location.State || filters.location.City) {
+      dispatch(getJobsBySearch({
+        jobTitle: filters.jobTitle ? filters.jobTitle : "",
+        jobType: filters.jobType ? filters.jobType.join(',') : [],
+        state: filters.location.State ? filters.location.State : "",
+        city: filters.location.City ? filters.location.City : "",
+      }));
+      history.push(`/jobs/search?jobType=${filters.jobType.join(',')}&jobTitle=${filters.jobTitle || ''}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
+    } else {
+      history.push('/');
+    }
+  }
+
   return (
     <Grid className={classes.filterDiv}>
       <Grid className={classes.itemDiv}>
@@ -55,10 +89,9 @@ const Filter = () => {
           value={filters.jobType}
           filterSelectedOptions
           options={jobTypeData}
-          getOptionLabel={(option) => (option.name ? option.name : "")}
+          getOptionLabel={(option) => (option)}
           onChange={(e, v) => {
-            if (v == null) setFilters({ ...filters, jobType: [] });
-            else setFilters({ ...filters, jobType: v });
+            setFilters({ ...filters, jobType: v });
           }}
           renderInput={(params) => <TextField {...params} variant="outlined" name="jobType" label="Job Type" />}
         />
@@ -76,7 +109,7 @@ const Filter = () => {
             else setFilters({ ...filters, jobTitle: v.name });
           }}
           getOptionLabel={(option) => (option.name ? option.name : "")}
-          renderInput={(params) => <TextField {...params} variant="outlined" name="jobProfile" label="Job Profile" />}
+          renderInput={(params) => <TextField {...params} variant="outlined" name="jobTitle" label="Job Title" />}
         />
       </Grid>
       <Grid className={classes.itemDiv}>
@@ -104,29 +137,11 @@ const Filter = () => {
           value={filters.location.City.name}
           options={data}
           getOptionLabel={(option) => (option.name ? option.name : "")}
-          groupBy={(option) => option.firstLetter}
           onChange={(e, v) => {
             if (v == null) setFilters({ ...filters, location: { ...filters.location, City: "" } });
             else setFilters({ ...filters, location: { ...filters.location, City: v.name } });
           }}
           renderInput={(params) => <TextField {...params} variant="outlined" name="City" label="City" />}
-        />
-      </Grid>
-      <Grid className={classes.itemDiv}>
-        <MyAutocomplete
-          size="small"
-          fullWidth
-          multiple
-          id="postedby"
-          value={filters.postedBy}
-          filterSelectedOptions
-          options={postedByData}
-          getOptionLabel={(option) => (option.name ? option.name : "")}
-          onChange={(e, v) => {
-            if (v == null) setFilters({ ...filters, postedBy: [] });
-            else setFilters({ ...filters, postedBy: v });
-          }}
-          renderInput={(params) => <TextField {...params} variant="outlined" name="postedBy" label="Posted By" />}
         />
       </Grid>
       <Grid className={classes.sliderGrid}>

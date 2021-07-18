@@ -54,7 +54,7 @@ const Job = ({ job, setCurrentId, setOpenPopup }) => {
             {job.jobTitle}
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            {job.jobType && job.jobType.map((type) => type.name)}
+            {job.jobType && job.jobType.map((type) => <div key={type}>{type}</div>)}
           </Typography>
           <Typography variant="h6" className={classes.title}>
             {job.salary}
