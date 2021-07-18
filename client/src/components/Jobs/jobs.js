@@ -6,7 +6,10 @@ import Job from "./Job/job";
 import useStyles from "./styles";
 
 const Jobs = ({ setCurrentId, openPopup, setOpenPopup }) => {
-  const { jobs, isLoading } = useSelector((state) => state.jobs);
+  const { jobs, isLoading } = useSelector((state) => {
+    console.log(state);
+    return state.jobs;
+  });
   const classes = useStyles();
   console.log(jobs);
   if (!jobs.length && !isLoading) return "No Posts";

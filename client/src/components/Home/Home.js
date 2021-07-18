@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Grid, Fab } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
 
 import { getJobs } from "../../actions/jobs";
@@ -10,14 +10,12 @@ import Form from "../Form/form";
 import Filter from "../Filter/Filter";
 
 const Home = () => {
-
   const classes = useStyles();
   const dispatch = useDispatch();
   const [currentId, setCurrentId] = useState(null);
   const [openPopup, setOpenPopup] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("profile"));
-
   useEffect(() => {
     dispatch(getJobs());
   }, [currentId, dispatch]);
