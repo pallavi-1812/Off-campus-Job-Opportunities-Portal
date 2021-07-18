@@ -103,7 +103,6 @@ const Filter = () => {
           id="jobtitle"
           filterSelectedOptions
           value={filters.jobTitle.name}
-          // onBlur={handleFilter}
           options={jobs}
           onChange={(e, v) => {
             if (v == null) setFilters({ ...filters, jobTitle: "" });
@@ -119,7 +118,6 @@ const Filter = () => {
           fullWidth
           id="state"
           filterSelectedOptions
-          // onBlur={handleFilter}
           value={filters.location.State.name}
           options={states}
           onChange={(e, v) => {
@@ -136,7 +134,6 @@ const Filter = () => {
           fullWidth
           id="city"
           filterSelectedOptions
-          // onBlur={handleFilter}
           value={filters.location.City.name}
           options={data}
           getOptionLabel={(option) => (option.name ? option.name : "")}
