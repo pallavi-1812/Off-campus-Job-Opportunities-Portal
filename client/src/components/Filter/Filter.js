@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router";
 import { data } from "../../resources/cityData";
 import { jobTypeData } from "../../resources/jobTypeData";
-import { postedByData } from "../../resources/postedByData";
 import { months } from "../../resources/months";
 import { jobs } from "../../resources/jobData";
 import useStyles from "./styles";
@@ -25,7 +24,6 @@ const Filter = () => {
   const [filters, setFilters] = useState({
     jobType: [],
     jobTitle: "",
-    postedBy: [],
     location: {
       City: "",
       State: "",
@@ -36,14 +34,27 @@ const Filter = () => {
 
   const [internBool, setInternBool] = useState(true);
 
-  useEffect(() => {
-    if (filters.jobType) {
-      handleFilter();
-    } else {
-      history.push(`${location.pathname}`);
-      dispatch(getJobs());
-    }
-  }, [filters.jobType.length, filters.jobTitle, filters.jobType, filters.location]);
+  // useEffect(() => {
+  //   if (filters.jobType.length > 0) {
+  //     console.log('fil');
+  //     handleFilter();
+  //   }
+  //   // } else {
+  //   //   if (filters.jobTitle == '' && filters.location.City == '' && filters.location.State == '') {
+  //   //     dispatch(getJobs());
+  //   //     history.push('/');
+  //   //   }
+  //   //   // } else {
+  //   //   //   dispatch(getJobsBySearch({
+  //   //   //     jobTitle: filters.jobTitle,
+  //   //   //     jobType: filters.jobType.join(','),
+  //   //   //     state: filters.location.State,
+  //   //   //     city: filters.location.City,
+  //   //   //   }));
+  //   //   //   history.push(`/jobs/search?jobType=${filters.jobType.join(',')}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
+  //   //   // }
+  //   // }
+  // }, [filters.jobType.length]);
 
   data.sort(function (a, b) {
     return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
@@ -64,17 +75,23 @@ const Filter = () => {
     },
   })(Autocomplete);
 
+  const handleJobType = (e, v) => {
+    setFilters({ ...filters, jobType: v });
+    handleFilter();
+  }
   const handleFilter = () => {
-    if (filters.jobTitle || filters.jobType || filters.location.State || filters.location.City) {
-      dispatch(getJobsBySearch({
-        jobTitle: filters.jobTitle ? filters.jobTitle : "",
-        jobType: filters.jobType ? filters.jobType.join(',') : [],
-        state: filters.location.State ? filters.location.State : "",
-        city: filters.location.City ? filters.location.City : "",
-      }));
-      history.push(`/jobs/search?jobType=${filters.jobType.join(',')}&jobTitle=${filters.jobTitle || ''}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
-    } else {
+    console.log(filters);
+    if (filters.jobTitle == '' && filters.jobType == '' && filters.location.City == '' && filters.location.State == '') {
+      dispatch(getJobs());
       history.push('/');
+    } else {
+      dispatch(getJobsBySearch({
+        jobTitle: filters.jobTitle,
+        jobType: filters.jobType.join(','),
+        state: filters.location.State,
+        city: filters.location.City,
+      }));
+      history.push(`/jobs/search?jobType=${filters.jobType.join(',')}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
     }
   }
 
@@ -92,6 +109,7 @@ const Filter = () => {
           getOptionLabel={(option) => (option)}
           onChange={(e, v) => {
             setFilters({ ...filters, jobType: v });
+
           }}
           renderInput={(params) => <TextField {...params} variant="outlined" name="jobType" label="Job Type" />}
         />
@@ -103,6 +121,7 @@ const Filter = () => {
           id="jobtitle"
           filterSelectedOptions
           value={filters.jobTitle.name}
+          onBlur={handleFilter}
           options={jobs}
           onChange={(e, v) => {
             if (v == null) setFilters({ ...filters, jobTitle: "" });
@@ -118,6 +137,7 @@ const Filter = () => {
           fullWidth
           id="state"
           filterSelectedOptions
+          onBlur={handleFilter}
           value={filters.location.State.name}
           options={states}
           onChange={(e, v) => {
@@ -134,6 +154,7 @@ const Filter = () => {
           fullWidth
           id="city"
           filterSelectedOptions
+          onBlur={handleFilter}
           value={filters.location.City.name}
           options={data}
           getOptionLabel={(option) => (option.name ? option.name : "")}
