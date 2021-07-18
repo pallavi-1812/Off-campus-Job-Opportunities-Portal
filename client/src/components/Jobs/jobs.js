@@ -5,7 +5,7 @@ import { Grid, CircularProgress } from "@material-ui/core";
 import Job from "./Job/job";
 import useStyles from "./styles";
 
-const Jobs = ({ setCurrentId, setOpenPopup }) => {
+const Jobs = ({ setCurrentId, openPopup, setOpenPopup }) => {
   const { jobs, isLoading } = useSelector((state) => state.jobs);
   const classes = useStyles();
   console.log(jobs);
@@ -16,7 +16,7 @@ const Jobs = ({ setCurrentId, setOpenPopup }) => {
     <Grid className={classes.container} container alignItems="stretch" spacing={3}>
       {jobs.map((job) => (
         <Grid key={job._id} item xs={12} sm={12} md={12} lg={12}>
-          <Job job={job} setCurrentId={setCurrentId} setOpenPopup={setOpenPopup} />
+          <Job job={job} setCurrentId={setCurrentId} openPopup={openPopup} setOpenPopup={setOpenPopup} />
         </Grid>
       ))}
     </Grid>

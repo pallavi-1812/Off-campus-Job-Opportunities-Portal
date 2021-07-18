@@ -1,8 +1,8 @@
 export const jobTypeData = [
-    "Part Time",
-    "Full Time",
-    "Internships",
-    "Remote"
+  "Part Time",
+  "Full Time",
+  "Internships",
+  "Remote"
 ];
 // export const jobTypeData = [
 //     {
