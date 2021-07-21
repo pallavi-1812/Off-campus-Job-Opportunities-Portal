@@ -71,7 +71,7 @@ const Filter = () => {
         state: filters.location.State,
         city: filters.location.City,
       }));
-      history.push(`/jobs/search?jobType=${filters.jobType.join(',')}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
+      history.push(`/jobs/tpc/search?jobType=${filters.jobType.join(',')}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
     }
   }
 
