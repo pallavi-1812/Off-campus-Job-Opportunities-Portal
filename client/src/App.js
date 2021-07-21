@@ -13,10 +13,13 @@ const App = () => {
     <BrowserRouter>
       <Navbar />
       <Switch>
-        <Route path="/" exact component={() => <Redirect to="/jobs" />} />
-        <Route path="/jobs" exact component={Home} />
-        <Route path="/jobs/search" exact component={Home} />
-        <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/jobs" />)} />
+        {/* <Redirect exact from="/jobs" to="/jobs/tpc" />
+        <Route exact path="/home/:page?" render={(props) => <Home {...props} />} /> */}
+        <Route path="/" exact component={() => <Redirect to="/jobs/tpc" />} />
+        <Route path="/jobs" exact component={() => <Redirect to="/jobs/tpc" />} />
+        <Route path="/jobs/:page?" exact component={(props) => <Home {...props} />} />
+        <Route path="/jobs/:page?/search" exact component={(props) => <Home {...props} />} />
+        <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/jobs/tpc" />)} />
         <Route path="/auth" exact component={Auth} />
       </Switch>
     </BrowserRouter>
