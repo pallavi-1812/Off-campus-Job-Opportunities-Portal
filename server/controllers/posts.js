@@ -10,6 +10,16 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getPostsBySearchByText = async (req, res) => {
+  const { searchText } = req.query;
+  try {
+    const posts = await PostMessage.find({ $text: { $search: searchText } });
+    res.status(200).json({ data: posts });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
 export const getPostsBySearch = async (req, res) => {
   const { jobTitle, jobType, state, city } = req.query;
   try {
