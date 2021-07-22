@@ -37,6 +37,8 @@ const postSchema = mongoose.Schema({
   },
 });
 
+postSchema.index({ '$**': 'text' });
+
 const PostMessage = mongoose.model("PostMessage", postSchema);
 
 export default PostMessage;
