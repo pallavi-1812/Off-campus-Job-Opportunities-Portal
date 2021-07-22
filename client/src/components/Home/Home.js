@@ -47,10 +47,10 @@ const Home = (props) => {
   return (
     <>
       <Grid className={classes.gridContainer} container justify="space-between" alignItems="stretch" spacing={3}>
-        <Grid item xs={12} sm={12} md={12} lg={3}>
+        <Grid item xs={12} sm={12} md={3} lg={3}>
           <Filter />
         </Grid>
-        <Container maxWidth="md">
+        <Grid item xs={12} sm={12} md={9} lg={9}>
           <Tabs value={selectedTab} onChange={handleChange}>
             <Tab label="tpc" />
             <Tab label="others" />
@@ -58,18 +58,16 @@ const Home = (props) => {
           {selectedTab === 0 && (
             <>
               {user?.result?.role === "1" && (
-                <Fab size="medium" color="primary" style={{ position: "absolute", right: "10px", zIndex: "100" }} onClick={() => setOpenPopup(true)}>
+                <Fab size="medium" color="primary" style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: "100" }} onClick={() => setOpenPopup(true)}>
                   <AddIcon />
                 </Fab>
               )}
               <Form openPopup={openPopup} currentId={currentId} setOpenPopup={setOpenPopup} setCurrentId={setCurrentId} />
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-                <Jobs setCurrentId={setCurrentId} openPopup={openPopup} setOpenPopup={setOpenPopup} />
-              </Grid>
+              <Jobs setCurrentId={setCurrentId} openPopup={openPopup} setOpenPopup={setOpenPopup} />
             </>
           )}
           {selectedTab === 1 && <Other />}
-        </Container>
+        </Grid>
       </Grid>
     </>
   );

@@ -21,6 +21,12 @@ export default makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    height: "80vh",
+    height: "30vmin",
+    [theme.breakpoints.down("sm")]: {
+      height: "25.5vmax",
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "45.5vmin",
+    },
   },
 }));

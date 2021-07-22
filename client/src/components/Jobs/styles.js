@@ -3,7 +3,12 @@ import { deepPurple } from "@material-ui/core/colors";
 
 export default makeStyles((theme) => ({
   container: {
-    padding: "10px 10px",
+    paddingTop: "20px",
+    paddingLeft: "80px",
+    paddingRight: "160px",
+    [theme.breakpoints.down("md")]: {
+      padding: "10px 10px",
+    },
   },
   heading: {
     color: "rgba(0,183,255, 1)",
