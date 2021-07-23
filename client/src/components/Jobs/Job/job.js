@@ -8,15 +8,12 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import EditIcon from "@material-ui/icons/Edit";
 import { useDispatch } from "react-redux";
 import moment from "moment";
-import { useHistory } from "react-router-dom";
-
-import { getJob, likeJob, deleteJob } from "../../../actions/jobs";
+import { likeJob, deleteJob } from "../../../actions/jobs";
 import useStyles from "./styles";
 
 const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
