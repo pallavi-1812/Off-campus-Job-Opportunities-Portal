@@ -1,11 +1,25 @@
 import * as api from "../api/index";
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH, START_LOADING, END_LOADING } from "../constants/actionTypes";
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH, START_LOADING, END_LOADING, FETCH_BY_SEARCH_TEXT } from "../constants/actionTypes";
 
 export const getJobs = () => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.fetchJobs();
     dispatch({ type: FETCH_ALL, payload: data });
+    console.log('get');
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getJobsBySearchText = (searchQuery) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const {
+      data: { data },
+    } = await api.fetchJobsBySearchText(searchQuery);
+    dispatch({ type: FETCH_BY_SEARCH_TEXT, payload: data });
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
