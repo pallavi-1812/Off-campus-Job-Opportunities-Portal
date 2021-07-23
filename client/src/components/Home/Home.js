@@ -51,9 +51,8 @@ const Home = (props) => {
         <Grid item xs={12} sm={12} md={3} lg={3}>
           <Filter />
         </Grid>
-        <Container maxWidth="md">
-          <SearchBar />
         <Grid item xs={12} sm={12} md={9} lg={9}>
+          <SearchBar />
           <Tabs value={selectedTab} onChange={handleChange}>
             <Tab label="tpc" />
             <Tab label="others" />
