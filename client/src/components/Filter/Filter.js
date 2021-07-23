@@ -15,7 +15,6 @@ import { useDispatch } from "react-redux";
 import { getJobs, getJobsBySearch } from "../../actions/jobs";
 
 const Filter = () => {
-
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
@@ -35,10 +34,10 @@ const Filter = () => {
   const [internBool, setInternBool] = useState(true);
 
   useEffect(() => {
-    if (filters.location.City == '' && filters.location.State == '' && filters.jobTitle == '' && filters.jobType.length === 0) {
+    if (filters.location.City == "" && filters.location.State == "" && filters.jobTitle == "" && filters.jobType.length === 0) {
       dispatch(getJobs());
     } else if (filters.jobType.length || filters.jobTitle || filters.location.City || filters.location.State) handleFilter();
-  }, [filters.jobType.length, filters.jobTitle, filters.location.City, filters.location.State])
+  }, [filters.jobType.length, filters.jobTitle, filters.location.City, filters.location.State]);
 
   data.sort(function (a, b) {
     return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
@@ -61,19 +60,21 @@ const Filter = () => {
 
   const handleFilter = () => {
     console.log(filters);
-    if (filters.jobTitle == '' && filters.jobType == '' && filters.location.City == '' && filters.location.State == '') {
+    if (filters.jobTitle == "" && filters.jobType == "" && filters.location.City == "" && filters.location.State == "") {
       dispatch(getJobs());
-      history.push('/');
+      history.push("/");
     } else {
-      dispatch(getJobsBySearch({
-        jobTitle: filters.jobTitle,
-        jobType: filters.jobType.join(','),
-        state: filters.location.State,
-        city: filters.location.City,
-      }));
-      history.push(`/jobs/tpc/search?jobType=${filters.jobType.join(',')}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
+      dispatch(
+        getJobsBySearch({
+          jobTitle: filters.jobTitle,
+          jobType: filters.jobType.join(","),
+          state: filters.location.State,
+          city: filters.location.City,
+        })
+      );
+      history.push(`/jobs/tpc/search?jobType=${filters.jobType.join(",")}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
     }
-  }
+  };
 
   return (
     <Grid className={classes.filterDiv}>
@@ -86,9 +87,8 @@ const Filter = () => {
           value={filters.jobType}
           filterSelectedOptions
           options={jobTypeData}
-          getOptionLabel={(option) => (option)}
-          onChange={(e, v) => setFilters({ ...filters, jobType: v })
-          }
+          getOptionLabel={(option) => option}
+          onChange={(e, v) => setFilters({ ...filters, jobType: v })}
           renderInput={(params) => <TextField {...params} variant="outlined" name="jobType" label="Job Type" />}
         />
       </Grid>
@@ -140,7 +140,7 @@ const Filter = () => {
           renderInput={(params) => <TextField {...params} variant="outlined" name="City" label="City" />}
         />
       </Grid>
-      <Grid className={classes.sliderGrid}>
+      {/* <Grid className={classes.sliderGrid}>
         <Slider internBool={internBool} />
       </Grid>
       <Grid className={classes.itemDiv}>
@@ -161,7 +161,7 @@ const Filter = () => {
       </Grid>
       <Grid className={classes.itemDiv}>
         <DatePicker name="Start Date" label="Start Date" value={filters.startDate} onChange={(e) => setFilters({ ...filters, startDate: e.target.value })} />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };
