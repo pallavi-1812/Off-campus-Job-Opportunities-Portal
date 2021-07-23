@@ -17,8 +17,9 @@ const App = () => {
         <Route exact path="/home/:page?" render={(props) => <Home {...props} />} /> */}
         <Route path="/" exact component={() => <Redirect to="/jobs/tpc" />} />
         <Route path="/jobs" exact component={() => <Redirect to="/jobs/tpc" />} />
-        <Route path="/jobs/:page?" exact component={(props) => <Home {...props} />} />
-        <Route path="/jobs/:page?/search" exact component={(props) => <Home {...props} />} />
+        <Route path="/jobs/:page" exact component={(props) => <Home {...props} />} />
+        <Route path="/jobs/:page/searchByText" exact component={(props) => <Home {...props} />} />
+        <Route path="/jobs/:page/search" exact component={(props) => <Home {...props} />} />
         <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/jobs/tpc" />)} />
         <Route path="/auth" exact component={Auth} />
       </Switch>

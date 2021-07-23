@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Grid, Fab } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
 
 import { getJobs } from "../../actions/jobs";
@@ -10,6 +10,7 @@ import Other from "../Jobs/Job/other";
 import Form from "../Form/form";
 import Filter from "../Filter/Filter";
 import { Tabs, Tab } from "@material-ui/core";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Home = (props) => {
   const classes = useStyles();
@@ -43,13 +44,15 @@ const Home = (props) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   useEffect(() => {
     dispatch(getJobs());
-  }, [currentId, dispatch]);
+  }, [currentId]);
   return (
     <>
       <Grid className={classes.gridContainer} container justify="space-between" alignItems="stretch" spacing={3}>
         <Grid item xs={12} sm={12} md={3} lg={3}>
           <Filter />
         </Grid>
+        <Container maxWidth="md">
+          <SearchBar />
         <Grid item xs={12} sm={12} md={9} lg={9}>
           <Tabs value={selectedTab} onChange={handleChange}>
             <Tab label="tpc" />

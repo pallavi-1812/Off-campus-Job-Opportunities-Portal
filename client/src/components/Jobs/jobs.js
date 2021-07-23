@@ -7,14 +7,17 @@ import useStyles from "./styles";
 
 const Jobs = ({ setCurrentId, openPopup, setOpenPopup }) => {
   const { jobs, isLoading } = useSelector((state) => {
+    console.log(state);
     return state.jobs;
   });
+
   const classes = useStyles();
   if (!jobs.length && !isLoading) return "No Posts";
   return isLoading ? (
     <CircularProgress />
   ) : (
     <Grid className={classes.container} container alignItems="stretch" spacing={3}>
+      {console.log('dis')}
       {jobs.map((job) => (
         <Grid key={job._id} item xs={12} sm={12} md={12} lg={12}>
           <Job job={job} setCurrentId={setCurrentId} openPopup={openPopup} setOpenPopup={setOpenPopup} />
