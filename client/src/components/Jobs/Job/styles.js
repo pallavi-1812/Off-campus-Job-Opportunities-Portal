@@ -27,7 +27,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    borderRadius: "10px",
+    borderRadius: "0.5rem",
     position: "relative",
   },
   overlay: {
@@ -45,19 +45,10 @@ export default makeStyles((theme) => ({
   grid: {
     display: "flex",
   },
-  details: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: "0",
-  },
-  title: {
-    padding: "10px",
-  },
   cardActions: {
     display: "flex",
     alignItems: "right",
-    padding: "0",
-    paddingRight: "10px",
+    paddingRight: "0.5rem",
   },
   cardAction: {
     display: "block",
@@ -66,9 +57,6 @@ export default makeStyles((theme) => ({
   },
   cardContent: {
     width: "100%",
-    paddingTop: "10px",
-    paddingLeft: "10px",
-    paddingRight: "10px",
-    paddingBottom: "0",
-  },
+    padding: "0.5rem 1rem 0",
+  }
 }));

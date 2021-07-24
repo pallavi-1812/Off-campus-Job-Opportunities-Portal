@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase, Container, Grid, IconButton, Collapse, Divider } from "@material-ui/core/";
+import { Card, CardActions, CardContent, Button, Typography, Grid, IconButton, Collapse, Divider } from "@material-ui/core/";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FavoriteOutlinedIcon from "@material-ui/icons/FavoriteOutlined";
@@ -20,117 +20,63 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
     setExpanded(!expanded);
   };
 
-  const Likes = () => {
-    // if (job.likes.length > 0) {
-    //   return job.likes.find((like) => like === (user?.result?.googleId || user?.result?._id)) ? (
-    //     <>
-    //       <FavoriteOutlinedIcon fontSize="small" />
-    //     </>
-    //   ) : (
-    //     <>
-    //       <FavoriteBorderOutlinedIcon fontSize="small" />
-    //     </>
-    //   );
-    // }
-    return (
-      <>
-        <FavoriteBorderOutlinedIcon fontSize="small" />
-      </>
-    );
-  };
   const handleClick = () => {
     setCurrentId(job._id);
     setOpenPopup(true);
   };
+
   return (
     <Card className={classes.card} raised elevation={6}>
-      <div className={classes.details}>
-        <CardContent className={classes.cardContent}>
-          <Typography component="p">{moment(job.createdAt).fromNow()}</Typography>
-          <Grid container className={classes.gridContainer} justify="space-between" alignItems="stretch" spacing={0}>
-            <Grid item md={6} sm={12} xs={12}>
-              {job.jobTitle && (
-                <div>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    Job Title
-                  </Typography>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    {job.jobTitle}
-                  </Typography>
-                </div>
-              )}
-              {job.jobType.length > 0 && (
-                <div>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    Job Type
-                  </Typography>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    {job.jobType && job.jobType.join(", ")}
-                  </Typography>
-                </div>
-              )}
-              {job.duration && (
-                <div>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    Duration
-                  </Typography>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    {job.duration}
-                  </Typography>
-                </div>
-              )}
+      <CardContent className={classes.cardContent}>
+        <Typography variant="subtitle2">{moment(job.createdAt).fromNow()}</Typography>
+        <Grid container className={classes.gridContainer} justify="space-between" alignItems="stretch" spacing={0}>
+          <Grid item xs={12}>
+            <Typography variant="h4" display="inline" className={classes.title}>
+              {job.company && `${job.company}`}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            {(job.Location.City || job.Location.State) && (
+              <Typography variant="subtitle1" display="inline" className={classes.title}>
+                {job.Location.City && job.Location.State ? Object.values(job.Location).join(", ") : (job.Location.City ? job.Location.City : "") || (job.Location.State ? job.Location.State : "")}
+              </Typography>
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6" display="inline" className={classes.title}>
+              {job.jobTitle && `${job.jobTitle}`}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="subtitle1" display="inline" className={classes.title}>
+              {job.jobType && `${job.jobType}`}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6" display="inline" className={classes.title}>
+              {job.salary && `${job.salary}`}
+            </Typography>
+          </Grid>
+          <Grid container flexDirection="row">
+            <Grid item xs={12} lg={6}>
+              {job.startDate &&
+                <Typography variant="h6" display="inline" className={classes.title}>
+                  Start Date: {moment(job.startDate).format('DD-MM-YYYY')}
+                </Typography>}
             </Grid>
-            <Grid item md={6} sm={12} xs={12}>
-              {job.company && (
-                <div>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    Company
-                  </Typography>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    {job.company}
-                  </Typography>
-                </div>
-              )}
-              {job.salary && (
-                <div>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    Salary
-                  </Typography>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    {job.salary}
-                  </Typography>
-                </div>
-              )}
-              {job.startDate && (
-                <div>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    Start Date
-                  </Typography>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    {job.startDate && job.startDate.substring(0, 15)}
-                  </Typography>
-                </div>
-              )}
-            </Grid>
-            <Grid item sm={12} xs={12}>
-              {(job.Location.City || job.Location.State) && (
-                <div>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    Location
-                  </Typography>
-                  <Typography variant="h6" display="inline" className={classes.title}>
-                    {job.Location.City && job.Location.State ? Object.values(job.Location).join(", ") : (job.Location.City ? job.Location.City : "") || (job.Location.State ? job.Location.State : "")}
-                  </Typography>
-                </div>
-              )}
+            <Grid item xs={12} lg={6}>
+              {job.duration &&
+                <Typography variant="h6" display="inline" className={classes.title}>
+                  Duration: {job.duration}
+                </Typography>}
             </Grid>
           </Grid>
-        </CardContent>
-      </div>
+        </Grid>
+      </CardContent>
       {openPopup === false ? (
         <CardActions className={classes.cardActions}>
           <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
-            <Likes />
+            <FavoriteBorderOutlinedIcon />
           </IconButton>
           {user?.result?.role === "1" && (
             <IconButton className={classes.expand} color="primary" onClick={handleClick}>
@@ -158,7 +104,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
       ) : (
         <CardActions className={classes.cardActions}>
           <IconButton className={classes.expand} color="secondary" disabled={!user?.result}>
-            <Likes />
+            <FavoriteBorderOutlinedIcon />
           </IconButton>
           {user?.result?.role === "1" && (
             <IconButton className={classes.expand} color="primary">
@@ -187,13 +133,9 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Divider />
         <CardContent>
-          <Typography variant="h6">Info</Typography>
+          <Typography variant="h6">Description</Typography>
           <Typography paragraph>{job.description.Info}</Typography>
           <Typography variant="h6">Required Skills</Typography>
-          <Typography paragraph>{job.description.ReqSkills}</Typography>
-          <Typography variant="h6">Eligibility</Typography>
-          <Typography paragraph>{job.description.Eligibility}</Typography>
-          <Typography variant="h6">Rewards</Typography>
           <Typography paragraph>{job.description.Rewards}</Typography>
         </CardContent>
       </Collapse>
