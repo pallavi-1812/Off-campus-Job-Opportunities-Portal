@@ -23,7 +23,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
     duration: "",
     salary: "",
     company: "",
-    startDate: null,
+    startDate: "",
     Location: {
       City: "",
       State: "",
@@ -40,7 +40,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
-  const user = JSON.parse(localStorage.getItem("profile"));
+
   useEffect(() => {
     if (job) setJobData(job);
   }, [job, dispatch]);
@@ -95,9 +95,9 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
   })(Autocomplete);
   console.log(jobData);
   return (
-    <Dialog open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
+    <Dialog open={openPopup} maxWidth="lg" classes={{ paper: classes.dialogWrapper }}>
       <Grid container>
-        <Grid item xs={12} sm={12} md={6}>
+        <Grid item xs={12} md={6}>
           <DialogTitle className={classes.dialogTitle}>
             <div style={{ display: "flex" }}>
               <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center", padding: "8.75px" }}>
@@ -109,11 +109,11 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
             <Job job={jobData} />
           </DialogContent>
         </Grid>
-        <Grid item xs={12} sm={12} md={6}>
+        <Grid item xs={12} md={6}>
           <DialogTitle className={classes.dialogTitle}>
             <div style={{ display: "flex" }}>
               <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center" }}>
-                {currentId ? `Editing ${jobData.jobTitle}` : "Creating Job Post"}
+                {currentId ? `Editing ${jobData.jobTitle} Post` : "Creating Job Post"}
               </Typography>
               <IconButton
                 className={classes.root1}
@@ -286,10 +286,10 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                     size="small"
                     name="Info"
                     variant="outlined"
-                    label="Information"
+                    label="Description"
                     multiline
                     fullWidth
-                    rows={4}
+                    rows={10}
                     value={jobData.description.Info}
                     onChange={(e) => setJobData({ ...jobData, description: { ...jobData.description, Info: e.target.value } })}
                   />
@@ -303,28 +303,6 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                     rows={4}
                     value={jobData.description.ReqSkills}
                     onChange={(e) => setJobData({ ...jobData, description: { ...jobData.description, ReqSkills: e.target.value } })}
-                  />
-                  <TextField
-                    size="small"
-                    name="Rewards"
-                    variant="outlined"
-                    label="Rewards"
-                    multiline
-                    fullWidth
-                    rows={4}
-                    value={jobData.description.Rewards}
-                    onChange={(e) => setJobData({ ...jobData, description: { ...jobData.description, Rewards: e.target.value } })}
-                  />
-                  <TextField
-                    size="small"
-                    name="Eligibility"
-                    variant="outlined"
-                    label="Eligibility"
-                    multiline
-                    fullWidth
-                    rows={4}
-                    value={jobData.description.Eligibility}
-                    onChange={(e) => setJobData({ ...jobData, description: { ...jobData.description, Eligibility: e.target.value } })}
                   />
                   <TextField
                     size="small"
