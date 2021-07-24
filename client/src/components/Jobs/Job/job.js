@@ -57,18 +57,20 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
               {job.salary && `${job.salary}`}
             </Typography>
           </Grid>
-          <Grid container flexDirection="row">
+          <Grid container flexdirection="row">
             <Grid item xs={12} lg={6}>
-              {job.startDate &&
+              {job.startDate && (
                 <Typography variant="h6" display="inline" className={classes.title}>
-                  Start Date: {moment(job.startDate).format('DD-MM-YYYY')}
-                </Typography>}
+                  Start Date: {moment(job.startDate).format("DD-MM-YYYY")}
+                </Typography>
+              )}
             </Grid>
             <Grid item xs={12} lg={6}>
-              {job.duration &&
+              {job.duration && (
                 <Typography variant="h6" display="inline" className={classes.title}>
                   Duration: {job.duration}
-                </Typography>}
+                </Typography>
+              )}
             </Grid>
           </Grid>
         </Grid>

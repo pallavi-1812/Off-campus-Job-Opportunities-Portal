@@ -23,7 +23,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
     duration: "",
     salary: "",
     company: "",
-    startDate: "",
+    startDate: null,
     Location: {
       City: "",
       State: "",
