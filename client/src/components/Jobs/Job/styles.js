@@ -51,15 +51,24 @@ export default makeStyles((theme) => ({
     marginBottom: "0",
   },
   title: {
-    padding: "0 16px",
+    padding: "10px",
   },
   cardActions: {
     display: "flex",
     alignItems: "right",
+    padding: "0",
+    paddingRight: "10px",
   },
   cardAction: {
     display: "block",
     textAlign: "initial",
     color: "inherit",
+  },
+  cardContent: {
+    width: "100%",
+    paddingTop: "10px",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    paddingBottom: "0",
   },
 }));
