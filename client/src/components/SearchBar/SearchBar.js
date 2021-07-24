@@ -23,6 +23,7 @@ const SearchBar = () => {
     return (
         <Paper component="form" onSubmit={handleSearch} className={classes.root}>
             <InputBase
+                fullWidth
                 className={classes.input}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

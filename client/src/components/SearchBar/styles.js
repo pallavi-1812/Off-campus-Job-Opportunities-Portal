@@ -5,10 +5,9 @@ export default makeStyles((theme) => ({
         padding: '2px 4px',
         display: 'flex',
         alignItems: 'center',
-        marginRight: '1.2rem',
-        marginLeft: 'auto',
+        justifyContent: 'center',
         marginTop: '0.5rem',
-        width: 400,
+        width: '100%',
     },
     input: {
         marginLeft: theme.spacing(1),
