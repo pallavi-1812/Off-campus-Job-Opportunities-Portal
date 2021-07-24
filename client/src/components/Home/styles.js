@@ -7,6 +7,15 @@ export default makeStyles((theme) => ({
     display: "flex",
     padding: "10px",
   },
+  searchBar: {
+    padding: "0 8rem",
+    [theme.breakpoints.down("md")]: {
+      padding: "0 4rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 1rem",
+    },
+  },
   root1: {
     minWidth: 0,
     margin: theme.spacing(0.1),
