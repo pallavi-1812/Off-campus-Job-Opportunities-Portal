@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    height: "50%",
+    padding: "1rem 0",
     justifyContent: "center",
   },
   sliderGrid: {
@@ -20,13 +20,15 @@ export default makeStyles((theme) => ({
     backgroundColor: "#ffffff",
     display: "flex",
     flexDirection: "column",
+    padding: "1rem",
     alignItems: "center",
-    height: "35vmin",
-    [theme.breakpoints.down("sm")]: {
-      height: "25.5vmax",
-    },
-    [theme.breakpoints.down("xs")]: {
-      height: "55vmin",
-    },
+    height: "fit-content"
+    // height: "35vmin",
+    // [theme.breakpoints.down("sm")]: {
+    //   height: "25.5vmax",
+    // },
+    // [theme.breakpoints.down("xs")]: {
+    //   height: "55vmin",
+    // },
   },
 }));

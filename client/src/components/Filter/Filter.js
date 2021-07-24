@@ -2,12 +2,9 @@ import { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router";
 import { data } from "../../resources/cityData";
 import { jobTypeData } from "../../resources/jobTypeData";
-import { months } from "../../resources/months";
 import { jobs } from "../../resources/jobData";
 import useStyles from "./styles";
-import Slider from "./Slider";
-import DatePicker from "../Controls/DatePicker";
-import { Grid, TextField } from "@material-ui/core";
+import { Grid, TextField, Typography } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { withStyles } from "@material-ui/core/styles";
 import { states } from "../../resources/stateData";
@@ -18,7 +15,6 @@ const Filter = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
-  const location = useLocation();
 
   const [filters, setFilters] = useState({
     jobType: [],
@@ -30,8 +26,6 @@ const Filter = () => {
     month: "",
     startDate: null,
   });
-
-  const [internBool, setInternBool] = useState(true);
 
   useEffect(() => {
     if (filters.location.City == "" && filters.location.State == "" && filters.jobTitle == "" && filters.jobType.length === 0) {
@@ -78,6 +72,7 @@ const Filter = () => {
 
   return (
     <Grid className={classes.filterDiv}>
+      <Typography variant="h5">Filters</Typography>
       <Grid className={classes.itemDiv}>
         <MyAutocomplete
           size="small"
