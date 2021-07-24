@@ -28,7 +28,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
   return (
     <Card className={classes.card} raised elevation={6}>
       <CardContent className={classes.cardContent}>
-        <Typography variant="subtitle2">{moment(job.createdAt).fromNow()}</Typography>
+        <Typography variant="subtitle2" align="right">{moment(job.createdAt).fromNow()}</Typography>
         <Grid container className={classes.gridContainer} justify="space-between" alignItems="stretch" spacing={0}>
           <Grid item xs={12}>
             <Typography variant="h4" display="inline" className={classes.title}>
