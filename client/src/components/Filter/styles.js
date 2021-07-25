@@ -20,7 +20,7 @@ export default makeStyles((theme) => ({
     backgroundColor: "#ffffff",
     display: "flex",
     flexDirection: "column",
-    padding: "0.3rem",
+    padding: "0.2rem",
     alignItems: "center",
     height: "fit-content",
     // height: "35vmin",
