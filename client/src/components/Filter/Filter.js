@@ -30,6 +30,7 @@ const Filter = () => {
   useEffect(() => {
     if (filters.location.City == "" && filters.location.State == "" && filters.jobTitle == "" && filters.jobType.length === 0) {
       dispatch(getJobs());
+      window.history.pushState({}, "", '/jobs');
     } else if (filters.jobType.length || filters.jobTitle || filters.location.City || filters.location.State) handleFilter();
   }, [filters.jobType.length, filters.jobTitle, filters.location.City, filters.location.State]);
 
@@ -53,21 +54,15 @@ const Filter = () => {
   })(Autocomplete);
 
   const handleFilter = () => {
-    console.log(filters);
-    if (filters.jobTitle == "" && filters.jobType == "" && filters.location.City == "" && filters.location.State == "") {
-      dispatch(getJobs());
-      history.push("/");
-    } else {
-      dispatch(
-        getJobsBySearch({
-          jobTitle: filters.jobTitle,
-          jobType: filters.jobType.join(","),
-          state: filters.location.State,
-          city: filters.location.City,
-        })
-      );
-      history.push(`/jobs/tpc/search?jobType=${filters.jobType.join(",")}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
-    }
+    dispatch(
+      getJobsBySearch({
+        jobTitle: filters.jobTitle,
+        jobType: filters.jobType.join(","),
+        state: filters.location.State,
+        city: filters.location.City,
+      })
+    );
+    window.history.pushState({}, "", `/jobs/search?jobType=${filters.jobType.join(",")}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
   };
 
   return (

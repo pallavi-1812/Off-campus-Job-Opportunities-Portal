@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Paper, InputBase, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './styles';
-import { getJobsBySearchText } from '../../actions/jobs';
+import { getJobs, getJobsBySearchText } from '../../actions/jobs';
 import { useHistory } from 'react-router-dom';
 
 const SearchBar = () => {
@@ -16,7 +16,10 @@ const SearchBar = () => {
         e.preventDefault();
         if (search !== "") {
             dispatch(getJobsBySearchText(search));
-            history.push(`/jobs/tpc/searchByText?searchText=${search}`);
+            window.history.pushState({}, "", `/jobs/searchByText?searchText=${search}`);
+        } else {
+            dispatch(getJobs());
+            window.history.pushState({}, "", `/jobs`);
         }
     }
 
