@@ -238,11 +238,11 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                       filterSelectedOptions
                       inputValue={jobData.Location.City ? jobData.Location.City : ""}
                       options={data}
-                      getOptionLabel={(option) => (option.name ? option.name : "")}
-                      getOptionSelected={(option, value) => option.name === value.name}
+                      getOptionLabel={(option) => (option ? option : "")}
+                      getOptionSelected={(option, value) => option === value}
                       onChange={(e, v) => {
                         if (v == null) setJobData({ ...jobData, Location: { ...jobData.Location, City: "" } });
-                        else setJobData({ ...jobData, Location: { ...jobData.Location, City: v.name } });
+                        else setJobData({ ...jobData, Location: { ...jobData.Location, City: v } });
                       }}
                       renderInput={(params) => (
                         <TextField
@@ -263,11 +263,11 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                       filterSelectedOptions
                       inputValue={jobData.Location.State ? jobData.Location.State : ""}
                       options={states}
-                      getOptionLabel={(option) => (option.name ? option.name : "")}
-                      getOptionSelected={(option, value) => option.name === value.name}
+                      getOptionLabel={(option) => (option ? option : "")}
+                      getOptionSelected={(option, value) => option === value}
                       onChange={(e, v) => {
                         if (v == null) setJobData({ ...jobData, Location: { ...jobData.Location, State: "" } });
-                        else setJobData({ ...jobData, Location: { ...jobData.Location, State: v.name } });
+                        else setJobData({ ...jobData, Location: { ...jobData.Location, State: v } });
                       }}
                       renderInput={(params) => (
                         <TextField
