@@ -11,12 +11,24 @@ import Form from "../Form/form";
 import Filter from "../Filter/Filter";
 import { Tabs, Tab } from "@material-ui/core";
 import SearchBar from "../SearchBar/SearchBar";
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [currentId, setCurrentId] = useState(null);
   const [openPopup, setOpenPopup] = useState(false);
+  const [search, setSearch] = useState('');
+  const [filters, setFilters] = useState({
+    jobType: [],
+    jobTitle: "",
+    location: {
+      City: "",
+      State: "",
+    },
+    month: "",
+    startDate: null,
+  });
 
   const { match, history } = props;
   const { params } = match;
@@ -37,11 +49,24 @@ const Home = (props) => {
   const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
 
   const handleChange = (event, newValue) => {
+    // window.history.pushState({}, '', `/jobs/${tabNameToIndex[newValue]}`);
     history.push(`/jobs/${tabNameToIndex[newValue]}`);
     setSelectedTab(newValue);
+    setFilters({
+      jobType: [],
+      jobTitle: "",
+      location: {
+        City: "",
+        State: "",
+      },
+      month: "",
+      startDate: null,
+    });
+    setSearch("");
   };
 
   const user = JSON.parse(localStorage.getItem("profile"));
+
   useEffect(() => {
     dispatch(getJobs());
   }, [currentId]);
@@ -49,10 +74,10 @@ const Home = (props) => {
     <>
       <Grid className={classes.gridContainer} container justify="space-between" alignItems="stretch" spacing={3}>
         <Grid item xs={12} sm={12} md={3} lg={3}>
-          <Filter />
+          <Filter filters={filters} setFilters={setFilters} />
         </Grid>
         <Grid item xs={12} sm={12} md={9} lg={9}>
-          <Grid className={classes.searchBar}><SearchBar /></Grid>
+          <Grid className={classes.searchBar}><SearchBar search={search} setSearch={setSearch} /></Grid>
           <Grid>
             <Tabs value={selectedTab} onChange={handleChange}>
               <Tab label="tpc" />

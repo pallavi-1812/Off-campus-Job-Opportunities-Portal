@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import FilterContext from "../../context/FilterContext";
 import { useLocation, useHistory } from "react-router";
 import { data } from "../../resources/cityData";
 import { jobTypeData } from "../../resources/jobTypeData";
@@ -11,25 +12,25 @@ import { states } from "../../resources/stateData";
 import { useDispatch } from "react-redux";
 import { getJobs, getJobsBySearch } from "../../actions/jobs";
 
-const Filter = () => {
+const Filter = ({ filters, setFilters }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const history = useHistory();
-
-  const [filters, setFilters] = useState({
-    jobType: [],
-    jobTitle: "",
-    location: {
-      City: "",
-      State: "",
-    },
-    month: "",
-    startDate: null,
-  });
-
+  // const { filters, setFilters } = useContext(FilterContext);
+  // const [filters, setFilters] = useState({
+  //   jobType: [],
+  //   jobTitle: "",
+  //   location: {
+  //     City: "",
+  //     State: "",
+  //   },
+  //   month: "",
+  //   startDate: null,
+  // });
+  console.log(filters);
   useEffect(() => {
     if (filters.location.City == "" && filters.location.State == "" && filters.jobTitle == "" && filters.jobType.length === 0) {
       dispatch(getJobs());
+      window.history.pushState({}, '', '/jobs/tpc');
     } else if (filters.jobType.length || filters.jobTitle || filters.location.City || filters.location.State) handleFilter();
   }, [filters.jobType.length, filters.jobTitle, filters.location.City, filters.location.State]);
 
@@ -53,21 +54,16 @@ const Filter = () => {
   })(Autocomplete);
 
   const handleFilter = () => {
-    console.log(filters);
-    if (filters.jobTitle == "" && filters.jobType == "" && filters.location.City == "" && filters.location.State == "") {
-      dispatch(getJobs());
-      history.push("/");
-    } else {
-      dispatch(
-        getJobsBySearch({
-          jobTitle: filters.jobTitle,
-          jobType: filters.jobType.join(","),
-          state: filters.location.State,
-          city: filters.location.City,
-        })
-      );
-      history.push(`/jobs/tpc/search?jobType=${filters.jobType.join(",")}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
-    }
+    dispatch(
+      getJobsBySearch({
+        jobTitle: filters.jobTitle,
+        jobType: filters.jobType.join(","),
+        state: filters.location.State,
+        city: filters.location.City,
+      })
+    );
+    // history.push(`/jobs/tpc/search?jobType=${filters.jobType.join(",")}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`);
+    window.history.pushState({}, '', `/jobs/tpc/search?jobType=${filters.jobType.join(",")}&jobTitle=${filters.jobTitle || ""}&state=${filters.location.State || ""}&city=${filters.location.City || ""}`)
   };
 
   return (
@@ -96,6 +92,7 @@ const Filter = () => {
           value={filters.jobTitle.name}
           options={jobs}
           onChange={(e, v) => {
+            console.log(v);
             if (v == null) setFilters({ ...filters, jobTitle: "" });
             else setFilters({ ...filters, jobTitle: v.name });
           }}
@@ -109,13 +106,13 @@ const Filter = () => {
           fullWidth
           id="state"
           filterSelectedOptions
-          value={filters.location.State.name}
+          value={filters.location.State}
           options={states}
           onChange={(e, v) => {
             if (v == null) setFilters({ ...filters, location: { ...filters.location, State: "" } });
-            else setFilters({ ...filters, location: { ...filters.location, State: v.name } });
+            else setFilters({ ...filters, location: { ...filters.location, State: v } });
           }}
-          getOptionLabel={(option) => (option.name ? option.name : "")}
+          getOptionLabel={(option) => (option ? option : "")}
           renderInput={(params) => <TextField {...params} variant="outlined" name="State" label="State" />}
         />
       </Grid>
@@ -125,12 +122,12 @@ const Filter = () => {
           fullWidth
           id="city"
           filterSelectedOptions
-          value={filters.location.City.name}
+          value={filters.location.City}
           options={data}
-          getOptionLabel={(option) => (option.name ? option.name : "")}
+          getOptionLabel={(option) => (option ? option : "")}
           onChange={(e, v) => {
             if (v == null) setFilters({ ...filters, location: { ...filters.location, City: "" } });
-            else setFilters({ ...filters, location: { ...filters.location, City: v.name } });
+            else setFilters({ ...filters, location: { ...filters.location, City: v } });
           }}
           renderInput={(params) => <TextField {...params} variant="outlined" name="City" label="City" />}
         />

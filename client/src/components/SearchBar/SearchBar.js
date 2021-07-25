@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Paper, InputBase, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './styles';
-import { getJobsBySearchText } from '../../actions/jobs';
-import { useHistory } from 'react-router-dom';
+import { getJobs, getJobsBySearchText } from '../../actions/jobs';
 
-const SearchBar = () => {
+const SearchBar = ({ search, setSearch }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const history = useHistory();
-    const [search, setSearch] = useState('');
 
     const handleSearch = (e) => {
         e.preventDefault();
         if (search !== "") {
             dispatch(getJobsBySearchText(search));
-            history.push(`/jobs/tpc/searchByText?searchText=${search}`);
+            window.history.pushState({}, '', `/jobs/tpc/searchByText?searchText=${search}`);
         }
     }
 

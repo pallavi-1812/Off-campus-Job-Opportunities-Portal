@@ -7,7 +7,6 @@ export default (state = { isLoading: true, jobs: [] }, action) => {
     case END_LOADING:
       return { ...state, isLoading: false };
     case FETCH_ALL:
-      console.log('fetchall');
       return {
         ...state,
         jobs: action.payload,
