@@ -15,6 +15,8 @@ const Filter = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
+  console.log(location);
 
   const [filters, setFilters] = useState({
     jobType: [],
@@ -37,7 +39,7 @@ const Filter = () => {
   data.sort(function (a, b) {
     return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
   });
-
+  console.log(filters);
   const MyAutocomplete = withStyles({
     tag: {
       backgroundColor: "#3f50b5",

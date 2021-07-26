@@ -19,6 +19,7 @@ export const getJobsBySearchText = (searchQuery) => async (dispatch) => {
     const {
       data: { data },
     } = await api.fetchJobsBySearchText(searchQuery);
+    console.log(data);
     dispatch({ type: FETCH_BY_SEARCH_TEXT, payload: data });
     dispatch({ type: END_LOADING });
   } catch (error) {
