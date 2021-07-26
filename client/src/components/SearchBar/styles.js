@@ -2,22 +2,21 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     root: {
-        padding: '2px 4px',
+        width: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '0.5rem',
-        width: '100%',
+        height: '3.5rem',
+        marginLeft: '1.3rem'
     },
-    input: {
-        marginLeft: theme.spacing(1),
-        flex: 1,
+    chipInput: {
+        width: '100%',
+        background: '#fff',
+        border: '0px solid #fff',
     },
     iconButton: {
-        padding: 10,
-    },
-    divider: {
-        height: 28,
-        margin: 4,
-    },
+        background: '#fff',
+        position: 'relative',
+        right: '3.3rem'
+    }
 }));

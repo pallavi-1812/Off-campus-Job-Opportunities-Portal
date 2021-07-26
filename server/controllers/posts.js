@@ -13,7 +13,7 @@ export const getPosts = async (req, res) => {
 export const getPostsBySearchByText = async (req, res) => {
   const { searchText } = req.query;
   try {
-    const posts = await PostMessage.find({ $text: { $search: searchText } });
+    const posts = await PostMessage.find({ $text: { $search: searchText.split(',').join(' ') } });
     res.status(200).json({ data: posts });
   } catch (error) {
     res.status(404).json({ message: error.message });
