@@ -1,9 +1,9 @@
 import React from "react";
 import clsx from "clsx";
 import { Card, CardActions, CardContent, Button, Typography, Grid, IconButton, Collapse, Divider } from "@material-ui/core/";
-import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
+import BookmarkBorderOutlinedIcon from "@material-ui/icons/BookmarkBorderOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
-import FavoriteOutlinedIcon from "@material-ui/icons/FavoriteOutlined";
+import BookmarkOutlinedIcon from "@material-ui/icons/BookmarkOutlined";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import EditIcon from "@material-ui/icons/Edit";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,7 @@ import moment from "moment";
 import { likeJob, deleteJob } from "../../../actions/jobs";
 import useStyles from "./styles";
 
-const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
+const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -19,16 +19,35 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const Favorites = () => {
+    if (job.favorites.length > 0) {
+      return job.favorites.find((favorite) => favorite === (user?.result?.googleId || user?.result?._id)) ? (
+        <>
+          <BookmarkOutlinedIcon fontSize="small" />
+        </>
+      ) : (
+        <>
+          <BookmarkBorderOutlinedIcon fontSize="small" />
+        </>
+      );
+    }
+    return (
+      <>
+        <BookmarkBorderOutlinedIcon fontSize="small" />
+      </>
+    );
+  };
 
   const handleClick = () => {
     setCurrentId(job._id);
     setOpenPopup(true);
   };
-
   return (
     <Card className={classes.card} raised elevation={6}>
       <CardContent className={classes.cardContent}>
-        <Typography variant="subtitle2" align="right">{moment(job.createdAt).fromNow()}</Typography>
+        <Typography variant="subtitle2" align="right">
+          {moment(job.createdAt).fromNow()}
+        </Typography>
         <Grid container className={classes.gridContainer} justify="space-between" alignItems="stretch" spacing={0}>
           <Grid item xs={12}>
             <Typography variant="h4" display="inline" className={classes.title}>
@@ -78,9 +97,9 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
       {openPopup === false ? (
         <CardActions className={classes.cardActions}>
           <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
-            <FavoriteBorderOutlinedIcon />
+            <Favorites />
           </IconButton>
-          {user?.result?.role === "1" && (
+          {openFavoritePopup === false && user?.result?.role === "1" && (
             <IconButton className={classes.expand} color="primary" onClick={handleClick}>
               <EditIcon fontSize="small" />
             </IconButton>
@@ -106,7 +125,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
       ) : (
         <CardActions className={classes.cardActions}>
           <IconButton className={classes.expand} color="secondary" disabled={!user?.result}>
-            <FavoriteBorderOutlinedIcon />
+            <BookmarkBorderOutlinedIcon />
           </IconButton>
           {user?.result?.role === "1" && (
             <IconButton className={classes.expand} color="primary">
@@ -138,7 +157,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup }) => {
           <Typography variant="h6">Description</Typography>
           <Typography paragraph>{job.description.Info}</Typography>
           <Typography variant="h6">Required Skills</Typography>
-          <Typography paragraph>{job.description.Rewards}</Typography>
+          <Typography paragraph>{job.description.ReqSkills}</Typography>
         </CardContent>
       </Collapse>
     </Card>

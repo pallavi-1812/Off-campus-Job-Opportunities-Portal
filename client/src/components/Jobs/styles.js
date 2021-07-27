@@ -10,5 +10,8 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       padding: "0.5rem 1rem 0",
     },
+    loading: {
+      marginLeft: "20px",
+    },
   },
 }));

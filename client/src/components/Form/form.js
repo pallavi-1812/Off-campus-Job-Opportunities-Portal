@@ -31,8 +31,6 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
     description: {
       Info: "",
       ReqSkills: "",
-      Eligibility: "",
-      Rewards: "",
     },
     applyLink: "",
   });
@@ -62,8 +60,6 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
       description: {
         Info: "",
         ReqSkills: "",
-        Eligibility: "",
-        Rewards: "",
       },
       applyLink: "",
     });
@@ -93,12 +89,11 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
       },
     },
   })(Autocomplete);
-  console.log(jobData);
   return (
     <Dialog open={openPopup} maxWidth="lg" classes={{ paper: classes.dialogWrapper }}>
       <Grid container>
         <Grid item xs={12} md={6}>
-          <DialogTitle className={classes.dialogTitle} style={{ padding: '0' }}>
+          <DialogTitle className={classes.dialogTitle} style={{ padding: "0" }}>
             <div style={{ display: "flex" }}>
               <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center", padding: "8.75px" }}>
                 Preview
@@ -110,8 +105,8 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
           </DialogContent>
         </Grid>
         <Grid item xs={12} md={6}>
-          <DialogTitle className={classes.dialogTitle} style={{ padding: '0' }}>
-            <div style={{ display: "flex", }}>
+          <DialogTitle className={classes.dialogTitle} style={{ padding: "0" }}>
+            <div style={{ display: "flex" }}>
               <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center" }}>
                 {currentId ? `Editing ${jobData.jobTitle} Post` : "Creating Job Post"}
               </Typography>

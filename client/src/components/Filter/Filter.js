@@ -16,7 +16,6 @@ const Filter = () => {
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
-  console.log(location);
 
   const [filters, setFilters] = useState({
     jobType: [],
@@ -32,14 +31,13 @@ const Filter = () => {
   useEffect(() => {
     if (filters.location.City == "" && filters.location.State == "" && filters.jobTitle == "" && filters.jobType.length === 0) {
       dispatch(getJobs());
-      window.history.pushState({}, "", '/jobs');
+      window.history.pushState({}, "", "/jobs");
     } else if (filters.jobType.length || filters.jobTitle || filters.location.City || filters.location.State) handleFilter();
   }, [filters.jobType.length, filters.jobTitle, filters.location.City, filters.location.State]);
 
   data.sort(function (a, b) {
     return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
   });
-  console.log(filters);
   const MyAutocomplete = withStyles({
     tag: {
       backgroundColor: "#3f50b5",

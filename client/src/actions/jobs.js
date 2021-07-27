@@ -1,12 +1,11 @@
 import * as api from "../api/index";
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH, START_LOADING, END_LOADING, FETCH_BY_SEARCH_TEXT } from "../constants/actionTypes";
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH, START_LOADING, END_LOADING, FETCH_BY_SEARCH_TEXT, FETCH_FAVORITES } from "../constants/actionTypes";
 
 export const getJobs = () => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.fetchJobs();
     dispatch({ type: FETCH_ALL, payload: data });
-    console.log('get');
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
@@ -19,7 +18,6 @@ export const getJobsBySearchText = (searchQuery) => async (dispatch) => {
     const {
       data: { data },
     } = await api.fetchJobsBySearchText(searchQuery);
-    console.log(data);
     dispatch({ type: FETCH_BY_SEARCH_TEXT, payload: data });
     dispatch({ type: END_LOADING });
   } catch (error) {
@@ -34,6 +32,16 @@ export const getJobsBySearch = (searchQuery) => async (dispatch) => {
       data: { data },
     } = await api.fetchJobsBySearch(searchQuery);
     dispatch({ type: FETCH_BY_SEARCH, payload: data });
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getFavoriteJobs = () => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.fetchFavoriteJobs();
+    dispatch({ type: FETCH_FAVORITES, payload: data });
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
@@ -69,8 +77,8 @@ export const deleteJob = (id) => async (dispatch) => {
 };
 export const likeJob = (id) => async (dispatch) => {
   try {
+    console.log(id);
     const { data } = await api.likeJob(id);
-
     dispatch({ type: LIKE, payload: data });
   } catch (error) {
     console.log(error.message);

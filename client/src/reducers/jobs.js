@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH, START_LOADING, END_LOADING, FETCH_BY_SEARCH_TEXT } from "../constants/actionTypes";
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH, START_LOADING, END_LOADING, FETCH_BY_SEARCH_TEXT, FETCH_FAVORITES } from "../constants/actionTypes";
 
 export default (state = { isLoading: true, jobs: [] }, action) => {
   switch (action.type) {
@@ -7,7 +7,6 @@ export default (state = { isLoading: true, jobs: [] }, action) => {
     case END_LOADING:
       return { ...state, isLoading: false };
     case FETCH_ALL:
-      console.log('fetchall');
       return {
         ...state,
         jobs: action.payload,
@@ -15,6 +14,8 @@ export default (state = { isLoading: true, jobs: [] }, action) => {
     case FETCH_BY_SEARCH:
       return { ...state, jobs: action.payload };
     case FETCH_BY_SEARCH_TEXT:
+      return { ...state, jobs: action.payload };
+    case FETCH_FAVORITES:
       return { ...state, jobs: action.payload };
     case LIKE:
       return { ...state, jobs: state.jobs.map((job) => (job._id === action.payload._id ? action.payload : job)) };
