@@ -2,9 +2,7 @@ import mongoose from "mongoose";
 
 const jobDescSchema = mongoose.Schema({
   Info: String,
-  Eligibility: String,
   ReqSkills: String,
-  Rewards: String,
 });
 
 const locationSchema = mongoose.Schema({
@@ -31,13 +29,17 @@ const postSchema = mongoose.Schema({
   startDate: {
     type: String,
   },
+  favorites: {
+    type: [String],
+    default: [],
+  },
   createdAt: {
     type: Date,
     default: new Date(),
   },
 });
 
-postSchema.index({ '$**': 'text' });
+postSchema.index({ "$**": "text" });
 
 const PostMessage = mongoose.model("PostMessage", postSchema);
 
