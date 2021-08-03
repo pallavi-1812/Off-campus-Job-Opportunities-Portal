@@ -14,4 +14,11 @@ export default makeStyles((theme) => ({
       marginLeft: "20px",
     },
   },
+  loading: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh'
+  }
 }));
