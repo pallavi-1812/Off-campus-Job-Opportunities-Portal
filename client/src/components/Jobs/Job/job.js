@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { Card, CardActions, CardContent, Button, Typography, Grid, IconButton, Collapse, Divider } from "@material-ui/core/";
+import { Card, CardActions, CardContent, Button, Typography, Grid, IconButton, Collapse, Divider, Tooltip } from "@material-ui/core/";
 import BookmarkBorderOutlinedIcon from "@material-ui/icons/BookmarkBorderOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
 import BookmarkOutlinedIcon from "@material-ui/icons/BookmarkOutlined";
@@ -96,31 +96,39 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
       </CardContent>
       {openPopup === false ? (
         <CardActions className={classes.cardActions}>
-          <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
-            <Favorites />
-          </IconButton>
-          {openFavoritePopup === false && user?.result?.role === "1" && (
-            <IconButton className={classes.expand} color="primary" onClick={handleClick}>
-              <EditIcon fontSize="small" />
+          <Tooltip title="Save">
+            <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
+              <Favorites />
             </IconButton>
+          </Tooltip>
+          {openFavoritePopup === false && user?.result?.role === "1" && (
+            <Tooltip title="Edit">
+              <IconButton className={classes.expand} color="primary" onClick={handleClick}>
+                <EditIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
           )}
           {user?.result?.role === "1" && (
-            <IconButton className={classes.expand} color="secondary" onClick={() => dispatch(deleteJob(job._id))}>
-              <DeleteIcon fontSize="small" />
-            </IconButton>
+            <Tooltip title="Delete">
+              <IconButton className={classes.expand} color="secondary" onClick={() => dispatch(deleteJob(job._id))}>
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
           )}
           <Button className={classes.expand} color="secondary" href={job.applyLink}>
             Apply
           </Button>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-          >
-            <ExpandMoreIcon fontSize="small" />
-          </IconButton>
+          <Tooltip title="More Information">
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded,
+              })}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+            >
+              <ExpandMoreIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
         </CardActions>
       ) : (
         <CardActions className={classes.cardActions}>
