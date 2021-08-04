@@ -13,7 +13,7 @@ export const getPosts = async (req, res) => {
 export const getPostsBySearchByText = async (req, res) => {
   const { searchText } = req.query;
   try {
-    const posts = await PostMessage.find({ $text: { $search: searchText.split(",").join(" ") } });
+    const posts = await PostMessage.find({ $text: { $search: searchText.split(",").join(" ") } }).sort("-createdAt");
     res.status(200).json({ data: posts });
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -23,7 +23,7 @@ export const getPostsBySearchByText = async (req, res) => {
 export const getPostsBySearch = async (req, res) => {
   const { jobTitle, jobType, state, city } = req.query;
   try {
-    const posts = await PostMessage.find({ $or: [{ jobTitle }, { "Location.State": state }, { "Location.City": city }, { jobType: { $in: jobType.split(",") } }] });
+    const posts = await PostMessage.find({ $or: [{ jobTitle }, { "Location.State": state }, { "Location.City": city }, { jobType: { $in: jobType.split(",") } }] }).sort("-createdAt");
     res.status(200).json({ data: posts });
   } catch (error) {
     res.status(404).json({ message: error.message });
