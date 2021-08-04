@@ -22,9 +22,9 @@ const Favorites = ({ openFavoritePopup, setOpenFavoritePopup }) => {
     <Dialog open={openFavoritePopup} maxWidth="lg" classes={{ paper: classes.dialogWrapper }}>
       <Grid container>
         <Grid item xs={12} md={12}>
-          <DialogTitle className={classes.dialogTitle} style={{ padding: "0" }}>
+          <DialogTitle className={classes.dialogTitle} style={{ paddingTop: "0", paddingBottom: "0" }}>
             <div style={{ display: "flex" }}>
-              <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center" }}>
+              <Typography variant="h5" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center", fontWeight: "530" }}>
                 Favorites
               </Typography>
               <IconButton
@@ -38,7 +38,7 @@ const Favorites = ({ openFavoritePopup, setOpenFavoritePopup }) => {
               </IconButton>
             </div>
           </DialogTitle>
-          <DialogContent dividers>
+          <DialogContent dividers style={{ paddingTop: "0" }}>
             <Jobs openFavoritePopup={openFavoritePopup} openPopup={false} />
           </DialogContent>
         </Grid>

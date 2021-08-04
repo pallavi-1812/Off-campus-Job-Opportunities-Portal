@@ -96,7 +96,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
         <Grid item xs={12} md={6}>
           <DialogTitle className={classes.dialogTitle} style={{ paddingTop: "0", paddingBottom: "0" }}>
             <div style={{ display: "flex" }}>
-              <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center", padding: "8.75px" }}>
+              <Typography variant="h5" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center", padding: "8.75px", fontWeight: "530" }}>
                 Preview
               </Typography>
             </div>
@@ -108,7 +108,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
         <Grid item xs={12} md={6}>
           <DialogTitle className={classes.dialogTitle} style={{ paddingTop: "0", paddingBottom: "0" }}>
             <div style={{ display: "flex" }}>
-              <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center" }}>
+              <Typography variant="h5" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center", fontWeight: "530" }}>
                 {currentId ? `Editing ${jobData.jobTitle} Post` : "Creating Job Post"}
               </Typography>
               <IconButton
