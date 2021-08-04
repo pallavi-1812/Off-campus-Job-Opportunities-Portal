@@ -77,7 +77,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
   };
   const MyAutocomplete = withStyles({
     tag: {
-      backgroundColor: "#3f50b5",
+      backgroundColor: "#0062ff",
       height: 24,
       position: "relative",
       zIndex: 0,
@@ -85,15 +85,15 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
         color: "#ffffff",
       },
       "& .MuiChip-deleteIcon": {
-        color: "#757ce8",
+        color: "#fff",
       },
     },
   })(Autocomplete);
   return (
     <Dialog open={openPopup} maxWidth="lg" classes={{ paper: classes.dialogWrapper }}>
-      <Grid container>
+      <Grid container className={classes.Preview}>
         <Grid item xs={12} md={6}>
-          <DialogTitle className={classes.dialogTitle} style={{ padding: "0" }}>
+          <DialogTitle className={classes.dialogTitle} style={{ paddingTop: "0", paddingBottom: "0" }}>
             <div style={{ display: "flex" }}>
               <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center", padding: "8.75px" }}>
                 Preview
@@ -105,7 +105,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
           </DialogContent>
         </Grid>
         <Grid item xs={12} md={6}>
-          <DialogTitle className={classes.dialogTitle} style={{ padding: "0" }}>
+          <DialogTitle className={classes.dialogTitle} style={{ paddingTop: "0", paddingBottom: "0" }}>
             <div style={{ display: "flex" }}>
               <Typography variant="h6" component="h6" style={{ flexGrow: 1, display: "flex", alignItems: "center", textAlign: "center" }}>
                 {currentId ? `Editing ${jobData.jobTitle} Post` : "Creating Job Post"}
@@ -292,7 +292,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                     size="small"
                     name="ReqSkills"
                     variant="outlined"
-                    label="Skills Required"
+                    label="Required Skills (Ex: C++,Java,Python)"
                     multiline
                     fullWidth
                     rows={2}
@@ -312,7 +312,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                 </Grid>
                 <Grid container alignItems="stretch" spacing={1}>
                   <Grid item xs={12} sm={12} md={6} lg={6}>
-                    <Button className={classes.buttonSubmit} variant="contained" color="primary" size="small" type="submit" fullWidth>
+                    <Button className={classes.buttonSubmit} variant="contained" style={{ backgroundColor: "#0062ff", color: "#fff" }} size="small" type="submit" fullWidth>
                       Submit
                     </Button>
                   </Grid>

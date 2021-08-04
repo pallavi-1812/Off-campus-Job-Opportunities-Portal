@@ -8,6 +8,9 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     padding: "1rem 0",
     justifyContent: "center",
+    "& .MuiAutocomplete-fullWidth": {
+      backgroundColor: "#fff",
+    }
   },
   sliderGrid: {
     display: "flex",
@@ -17,18 +20,14 @@ export default makeStyles((theme) => ({
     justifyContent: "center",
   },
   filterDiv: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#fff",
     display: "flex",
     flexDirection: "column",
     padding: "0.2rem",
     alignItems: "center",
+    marginLeft: "1rem",
     height: "fit-content",
-    // height: "35vmin",
-    // [theme.breakpoints.down("sm")]: {
-    //   height: "25.5vmax",
-    // },
-    // [theme.breakpoints.down("xs")]: {
-    //   height: "55vmin",
-    // },
+    borderTop: "4px solid #0062ff",
+    boxShadow: "0px 2px 3px 0px #808080"
   },
 }));

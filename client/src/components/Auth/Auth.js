@@ -74,13 +74,13 @@ const Auth = () => {
             <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
             {isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
           </Grid>
-          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+          <Button type="submit" fullWidth variant="contained" style={{ backgroundColor: "#0062ff", color: "#fff" }} className={classes.submit}>
             {isSignUp ? "Sign Up" : "Sign In"}
           </Button>
           <GoogleLogin
             clientId={process.env.REACT_APP_CLIENT_ID}
             render={(renderProps) => (
-              <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
+              <Button className={classes.googleButton} style={{ backgroundColor: "#0062ff", color: "#fff" }} fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
                 Google Sign In
               </Button>
             )}

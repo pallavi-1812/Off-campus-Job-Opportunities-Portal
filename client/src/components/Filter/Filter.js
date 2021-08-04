@@ -42,7 +42,7 @@ const Filter = () => {
 
   const MyAutocomplete = withStyles({
     tag: {
-      backgroundColor: "#3f50b5",
+      backgroundColor: "#0062ff",
       height: 24,
       position: "relative",
       zIndex: 0,
@@ -50,7 +50,7 @@ const Filter = () => {
         color: "#ffffff",
       },
       "& .MuiChip-deleteIcon": {
-        color: "#757ce8",
+        color: "#fff",
       },
     },
   })(Autocomplete);
@@ -82,7 +82,7 @@ const Filter = () => {
   return (
     <Tooltip placement="right-start" open={open} onClose={handleClose} onOpen={handleOpen} title={tooltipText}>
       <Grid className={classes.filterDiv}>
-        <Typography variant="h5">Filters</Typography>
+        <Typography variant="h5" style={{ fontWeight: "530", }}>Browse Category</Typography>
         <Grid className={classes.itemDiv}>
           <MyAutocomplete
             size="small"

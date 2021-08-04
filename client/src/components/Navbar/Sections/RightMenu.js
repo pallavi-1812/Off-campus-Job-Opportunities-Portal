@@ -29,17 +29,6 @@ const StyledMenu = withStyles({
   />
 ));
 
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    "&:focus": {
-      backgroundColor: theme.palette.primary.main,
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
-
 const RightMenu = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -85,21 +74,21 @@ const RightMenu = () => {
           <StyledMenu id="customized-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
             <MenuItem>
               <ListItemIcon>
-                <AccountCircleIcon fontSize="small" color="primary" />
+                <AccountCircleIcon style={{ color: "#0062ff" }} fontSize="small" />
               </ListItemIcon>
               <ListItemText primary={user.result.name} />
             </MenuItem>
-            <StyledMenuItem className={classes.button} button onClick={logout}>
+            <MenuItem className={classes.button} button onClick={logout}>
               <ListItemIcon>
-                <PowerSettingsNewIcon fontSize="small" color="primary" />
+                <PowerSettingsNewIcon style={{ color: "#0062ff" }} fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="Logout" />
-            </StyledMenuItem>
+            </MenuItem>
           </StyledMenu>
         </>
       ) : (
         <div>
-          <Button variant="contained" color="primary" component={Link} to="/auth">
+          <Button className={classes.signInBtn} variant="contained" component={Link} to="/auth">
             Sign in
           </Button>
         </div>

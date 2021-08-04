@@ -6,6 +6,12 @@ export default makeStyles((theme) => ({
       marginBottom: theme.spacing(1),
     },
   },
+  Preview: {
+    flexDirection: "row",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column-reverse",
+    },
+  },
   root1: {
     minWidth: 0,
     margin: theme.spacing(0.1),

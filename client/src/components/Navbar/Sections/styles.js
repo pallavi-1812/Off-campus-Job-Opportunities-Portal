@@ -1,18 +1,38 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { deepPurple } from "@material-ui/core/colors";
+
 export default makeStyles((theme) => ({
   root: {
     display: "flex",
+  },
+  signInBtn: {
+    backgroundColor: "#0062ff",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#1473e7",
+    },
+    "&:focus": {
+      backgroundColor: "#1473e7",
+    }
   },
   paper: {
     marginRight: theme.spacing(2),
   },
   purple: {
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
+    color: theme.palette.getContrastText("#0062ff"),
+    backgroundColor: "#0062ff",
   },
   icon: {
     padding: "0",
   },
-  button: {},
+  button: {
+    "&:hover": {
+      backgroundColor: "#ececec",
+    },
+    "&:focus": {
+      backgroundColor: "#ececec",
+    },
+    "&:active": {
+      backgroundColor: "#ececec",
+    }
+  },
 }));

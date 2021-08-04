@@ -27,7 +27,7 @@ const Home = () => {
     <>
       {user?.result?.role === "1" && (
         <>
-          <Fab size="medium" color="primary" style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: "100" }} onClick={() => setOpenPopup(true)}>
+          <Fab size="medium" style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: "100", backgroundColor: "#0062ff", color: "#fff" }} onClick={() => setOpenPopup(true)}>
             <AddIcon />
           </Fab>
           <Fab size="medium" color="secondary" style={{ position: "fixed", bottom: "80px", right: "20px", zIndex: "100" }} onClick={() => setOpenFavoritePopup(true)}>

@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { Card, CardActions, CardContent, Button, Typography, Grid, IconButton, Collapse, Divider, Tooltip } from "@material-ui/core/";
+import { Card, CardActions, CardContent, Button, Typography, Grid, IconButton, Collapse, Divider, Tooltip, Chip } from "@material-ui/core/";
 import BookmarkBorderOutlinedIcon from "@material-ui/icons/BookmarkBorderOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
 import BookmarkOutlinedIcon from "@material-ui/icons/BookmarkOutlined";
@@ -37,7 +37,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
       </>
     );
   };
-
+  console.log(job.description.ReqSkills.split(","));
   const handleClick = () => {
     setCurrentId(job._id);
     setOpenPopup(true);
@@ -50,7 +50,12 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
         </Typography>
         <Grid container className={classes.gridContainer} justify="space-between" alignItems="stretch" spacing={0}>
           <Grid item xs={12}>
-            <Typography variant="h4" display="inline" className={classes.title}>
+            <Typography style={{ color: "#0062ff" }} variant="h4" display="inline" className={classes.title}>
+              {job.jobTitle && `${job.jobTitle}`}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h5" style={{ fontWeight: "500" }} display="inline" className={classes.title}>
               {job.company && `${job.company}`}
             </Typography>
           </Grid>
@@ -62,31 +67,28 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
             )}
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h6" display="inline" className={classes.title}>
-              {job.jobTitle && `${job.jobTitle}`}
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
             <Typography variant="subtitle1" display="inline" className={classes.title}>
-              {job.jobType && `${job.jobType}`}
+              {job.jobType && job.jobType.map((item) => (
+                <Chip size="small" label={item} style={{ marginRight: "3px", backgroundColor: "#d1e1fb", color: "#0062ff" }} />
+              ))}
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h6" display="inline" className={classes.title}>
+            <Typography variant="h6" style={{ fontWeight: "500" }} display="inline" className={classes.title}>
               {job.salary && `${job.salary}`}
             </Typography>
           </Grid>
           <Grid container flexdirection="row">
             <Grid item xs={12} lg={6}>
               {job.startDate && (
-                <Typography variant="h6" display="inline" className={classes.title}>
+                <Typography style={{ color: "#808080" }} variant="subtitle1" display="inline" className={classes.title}>
                   Start Date: {moment(job.startDate).format("DD-MM-YYYY")}
                 </Typography>
               )}
             </Grid>
             <Grid item xs={12} lg={6}>
               {job.duration && (
-                <Typography variant="h6" display="inline" className={classes.title}>
+                <Typography style={{ color: "#808080" }} variant="subtitle1" display="inline" className={classes.title}>
                   Duration: {job.duration}
                 </Typography>
               )}
@@ -97,7 +99,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
       {openPopup === false ? (
         <CardActions className={classes.cardActions}>
           <Grid className={classes.applyBtn}>
-            <Button className={classes.expand} color="primary" variant="contained" href={job.applyLink}>
+            <Button className={classes.expand} style={{ backgroundColor: "#0062ff", color: "#fff" }} variant="contained" href={job.applyLink}>
               Apply
             </Button>
           </Grid>
@@ -109,7 +111,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
             </Tooltip>
             {openFavoritePopup === false && user?.result?.role === "1" && (
               <Tooltip title="Edit">
-                <IconButton className={classes.expand} color="primary" onClick={handleClick}>
+                <IconButton className={classes.expand} style={{ color: "#0062ff" }} onClick={handleClick}>
                   <EditIcon fontSize="small" />
                 </IconButton>
               </Tooltip>
@@ -137,7 +139,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
       ) : (
         <CardActions className={classes.cardActions}>
           <Grid className={classes.applyBtn}>
-            <Button className={classes.expand} color="primary" variant="contained">
+            <Button className={classes.expand} style={{ backgroundColor: "#0062ff", color: "#fff" }} variant="contained">
               Apply
             </Button>
           </Grid>
@@ -146,7 +148,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
               <BookmarkBorderOutlinedIcon />
             </IconButton>
             {user?.result?.role === "1" && (
-              <IconButton className={classes.expand} color="primary">
+              <IconButton className={classes.expand} style={{ color: "#0062ff" }}>
                 <EditIcon fontSize="small" />
               </IconButton>
             )}
@@ -170,10 +172,20 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Divider />
         <CardContent>
-          <Typography variant="h6">Description</Typography>
-          <Typography paragraph>{job.description.Info}</Typography>
-          <Typography variant="h6">Required Skills</Typography>
-          <Typography paragraph>{job.description.ReqSkills}</Typography>
+          {job.description.ReqSkills &&
+            <>
+              <Typography variant="h6" style={{ fontWeight: "500" }}>Required Skills</Typography>
+              <Typography paragraph style={{ color: "#808080" }}>
+                {job.description.ReqSkills.split(",").map((item) => (
+                  <Chip size="small" label={item} style={{ marginRight: "3px", backgroundColor: "#d1e1fb", color: "#0062ff" }} />
+                ))}
+              </Typography>
+            </>}
+          {job.description.Info &&
+            <>
+              <Typography variant="h6" style={{ fontWeight: "500" }}>Description</Typography>
+              <Typography paragraph style={{ color: "#808080" }}>{job.description.Info}</Typography>
+            </>}
         </CardContent>
       </Collapse>
     </Card>
