@@ -10,6 +10,12 @@ export default makeStyles((theme) => ({
   border: {
     border: "solid",
   },
+  icons: {
+    marginLeft: 'auto !important',
+  },
+  applyBtn: {
+    marginLeft: '0.5rem !important',
+  },
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",

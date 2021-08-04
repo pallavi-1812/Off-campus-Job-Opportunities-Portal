@@ -96,29 +96,65 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
       </CardContent>
       {openPopup === false ? (
         <CardActions className={classes.cardActions}>
-          <Tooltip title="Save">
-            <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
-              <Favorites />
+          <Grid className={classes.applyBtn}>
+            <Button className={classes.expand} color="primary" variant="contained" href={job.applyLink}>
+              Apply
+            </Button>
+          </Grid>
+          <Grid className={classes.icons}>
+            <Tooltip title="Save">
+              <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
+                <Favorites />
+              </IconButton>
+            </Tooltip>
+            {openFavoritePopup === false && user?.result?.role === "1" && (
+              <Tooltip title="Edit">
+                <IconButton className={classes.expand} color="primary" onClick={handleClick}>
+                  <EditIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            )}
+            {user?.result?.role === "1" && (
+              <Tooltip title="Delete">
+                <IconButton className={classes.expand} color="secondary" onClick={() => dispatch(deleteJob(job._id))}>
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            )}
+            <Tooltip title="More Information">
+              <IconButton
+                className={clsx(classes.expand, {
+                  [classes.expandOpen]: expanded,
+                })}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+              >
+                <ExpandMoreIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        </CardActions>
+      ) : (
+        <CardActions className={classes.cardActions}>
+          <Grid className={classes.applyBtn}>
+            <Button className={classes.expand} color="primary" variant="contained">
+              Apply
+            </Button>
+          </Grid>
+          <Grid className={classes.icons}>
+            <IconButton className={classes.expand} color="secondary" disabled={!user?.result}>
+              <BookmarkBorderOutlinedIcon />
             </IconButton>
-          </Tooltip>
-          {openFavoritePopup === false && user?.result?.role === "1" && (
-            <Tooltip title="Edit">
-              <IconButton className={classes.expand} color="primary" onClick={handleClick}>
+            {user?.result?.role === "1" && (
+              <IconButton className={classes.expand} color="primary">
                 <EditIcon fontSize="small" />
               </IconButton>
-            </Tooltip>
-          )}
-          {user?.result?.role === "1" && (
-            <Tooltip title="Delete">
-              <IconButton className={classes.expand} color="secondary" onClick={() => dispatch(deleteJob(job._id))}>
+            )}
+            {user?.result?.role === "1" && (
+              <IconButton className={classes.expand} color="secondary">
                 <DeleteIcon fontSize="small" />
               </IconButton>
-            </Tooltip>
-          )}
-          <Button className={classes.expand} color="secondary" href={job.applyLink}>
-            Apply
-          </Button>
-          <Tooltip title="More Information">
+            )}
             <IconButton
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
@@ -128,35 +164,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
             >
               <ExpandMoreIcon fontSize="small" />
             </IconButton>
-          </Tooltip>
-        </CardActions>
-      ) : (
-        <CardActions className={classes.cardActions}>
-          <IconButton className={classes.expand} color="secondary" disabled={!user?.result}>
-            <BookmarkBorderOutlinedIcon />
-          </IconButton>
-          {user?.result?.role === "1" && (
-            <IconButton className={classes.expand} color="primary">
-              <EditIcon fontSize="small" />
-            </IconButton>
-          )}
-          {user?.result?.role === "1" && (
-            <IconButton className={classes.expand} color="secondary">
-              <DeleteIcon fontSize="small" />
-            </IconButton>
-          )}
-          <Button className={classes.expand} color="secondary">
-            Apply
-          </Button>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-          >
-            <ExpandMoreIcon fontSize="small" />
-          </IconButton>
+          </Grid>
         </CardActions>
       )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
