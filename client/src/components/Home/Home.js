@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Fab } from "@material-ui/core";
 import { useDispatch } from "react-redux";
+import { Grid, Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import BookmarkOutlinedIcon from "@material-ui/icons/BookmarkOutlined";
+
 import { getJobs } from "../../actions/jobs";
-import useStyles from "./styles";
 import Jobs from "../Jobs/jobs";
 import Form from "../Form/form";
 import Favorites from "../Favorites/Favorites";
 import Filter from "../Filter/Filter";
 import SearchBar from "../SearchBar/SearchBar";
+import useStyles from "./styles";
 
 const Home = () => {
   const classes = useStyles();
@@ -20,7 +21,7 @@ const Home = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
-    dispatch(getJobs());// eslint-disable-next-line
+    dispatch(getJobs()); // eslint-disable-next-line
   }, [currentId]);
   return (
     <>

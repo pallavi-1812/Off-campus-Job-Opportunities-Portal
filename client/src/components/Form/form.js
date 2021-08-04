@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { TextField, Grid, Button, Typography, IconButton } from "@material-ui/core";
 import { Dialog, DialogTitle, DialogContent } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import CloseIcon from "@material-ui/icons/Close";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+
 import { data } from "../../resources/cityData";
 import { jobs } from "../../resources/jobData";
 import { states } from "../../resources/stateData";
 import DatePicker from "../Controls/DatePicker";
 import { jobTypeData } from "../../resources/jobTypeData";
-import useStyles from "./styles";
-import { withStyles } from "@material-ui/core/styles";
 import { createJob, updateJob } from "../../actions/jobs";
 import Job from "./../Jobs/Job/job";
+import useStyles from "./styles";
 
 const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
   const [jobData, setJobData] = useState({

@@ -12,10 +12,13 @@ export default makeStyles((theme) => ({
     padding: "10px 30px",
     backgroundColor: "#fff",
   },
+  image: {
+    paddingRight: "10px",
+    height: "1.7rem",
+  },
   toolbar: {
     display: "flex",
     justifyContent: "flex-end",
-    width: "400px",
     [theme.breakpoints.down("sm")]: {
       width: "auto",
     },

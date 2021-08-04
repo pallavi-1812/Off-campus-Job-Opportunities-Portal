@@ -1,20 +1,21 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Grid, Typography, IconButton } from "@material-ui/core";
 import { Dialog, DialogTitle, DialogContent } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import { useDispatch } from "react-redux";
-import useStyles from "./styles";
+
 import { getFavoriteJobs, getJobs } from "../../actions/jobs";
 import Jobs from "./../Jobs/jobs";
+import useStyles from "./styles";
 
 const Favorites = ({ openFavoritePopup, setOpenFavoritePopup }) => {
-
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  useEffect(() => {// eslint-disable-next-line
+  useEffect(() => {
+    // eslint-disable-next-line
     if (openFavoritePopup == true) dispatch(getFavoriteJobs());
-    else dispatch(getJobs());// eslint-disable-next-line
+    else dispatch(getJobs()); // eslint-disable-next-line
   }, [openFavoritePopup]);
 
   return (
@@ -45,4 +46,5 @@ const Favorites = ({ openFavoritePopup, setOpenFavoritePopup }) => {
     </Dialog>
   );
 };
+
 export default Favorites;

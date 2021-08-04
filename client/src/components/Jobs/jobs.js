@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Grid, CircularProgress } from "@material-ui/core";
+
 import Job from "./Job/job";
 import useStyles from "./styles";
 

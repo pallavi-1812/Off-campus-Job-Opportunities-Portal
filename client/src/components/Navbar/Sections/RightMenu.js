@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
-import { LOGOUT } from "../../../constants/actionTypes";
-import { withStyles } from "@material-ui/core/styles";
 import { Menu, MenuItem, ListItemIcon, ListItemText, Button, IconButton, Avatar } from "@material-ui/core";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { withStyles } from "@material-ui/core/styles";
+
+import { LOGOUT } from "../../../constants/actionTypes";
 import useStyles from "./styles";
 
 const StyledMenu = withStyles({
@@ -50,6 +51,9 @@ const RightMenu = () => {
     setAnchorEl(null);
     setUser(null);
   };
+  const signIn = () => {
+    history.push("/auth");
+  };
   useEffect(() => {
     const token = user?.token;
 
@@ -59,7 +63,7 @@ const RightMenu = () => {
         logout();
       }
     }
-    setUser(JSON.parse(localStorage.getItem("profile")));// eslint-disable-next-line
+    setUser(JSON.parse(localStorage.getItem("profile"))); // eslint-disable-next-line
   }, [location]);
 
   return (
@@ -88,7 +92,7 @@ const RightMenu = () => {
         </>
       ) : (
         <div>
-          <Button className={classes.signInBtn} variant="contained" component={Link} to="/auth">
+          <Button className={classes.signInBtn} variant="contained" onClick={signIn}>
             Sign in
           </Button>
         </div>

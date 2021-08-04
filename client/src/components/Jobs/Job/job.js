@@ -8,6 +8,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import EditIcon from "@material-ui/icons/Edit";
 import { useDispatch } from "react-redux";
 import moment from "moment";
+
 import { likeJob, deleteJob } from "../../../actions/jobs";
 import useStyles from "./styles";
 
@@ -70,9 +71,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
           </Grid>
           <Grid item xs={12}>
             <Typography variant="subtitle1" display="inline" className={classes.title}>
-              {job.jobType && job.jobType.map((item, i) => (
-                <Chip key={i} size="small" label={item} style={{ marginRight: "3px", backgroundColor: "#d1e1fb", color: "#0062ff" }} />
-              ))}
+              {job.jobType && job.jobType.map((item, i) => <Chip key={i} size="small" label={item} style={{ marginRight: "3px", backgroundColor: "#d1e1fb", color: "#0062ff" }} />)}
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -177,21 +176,28 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
       )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Divider />
-        <CardContent>
-          {job.description.ReqSkills &&
+        <CardContent className={classes.cardContent}>
+          {job.description.ReqSkills && (
             <>
-              <Typography variant="h6" style={{ fontWeight: "500" }}>Required Skills</Typography>
-              <Typography paragraph style={{ color: "#808080" }}>
-                {job.description.ReqSkills.split(",").map((item, i) => (
-                  <Chip key={i} size="small" label={item} style={{ marginRight: "3px", backgroundColor: "#d1e1fb", color: "#0062ff" }} />
-                ))}
+              <Typography variant="h6" style={{ fontWeight: "500" }}>
+                Required Skills
               </Typography>
-            </>}
-          {job.description.Info &&
+              {job.description.ReqSkills.split(",").map((item, i) => (
+                <Chip key={i} size="small" label={item} style={{ marginRight: "3px", backgroundColor: "#d1e1fb", color: "#0062ff" }} />
+              ))}
+              <br />
+            </>
+          )}
+          {job.description.Info && (
             <>
-              <Typography variant="h6" style={{ fontWeight: "500" }}>Description</Typography>
-              <Typography paragraph style={{ color: "#808080" }}>{job.description.Info}</Typography>
-            </>}
+              <Typography variant="h6" style={{ fontWeight: "500" }}>
+                Description
+              </Typography>
+              <Typography paragraph style={{ color: "#808080" }}>
+                {job.description.Info}
+              </Typography>
+            </>
+          )}
         </CardContent>
       </Collapse>
     </Card>

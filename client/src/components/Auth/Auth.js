@@ -14,6 +14,7 @@ import Input from "./Input";
 
 const initialState = { firstName: "", lastName: "", email: "", password: "", confirmPassword: "" };
 dotenv.config();
+
 const Auth = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -80,7 +81,15 @@ const Auth = () => {
           <GoogleLogin
             clientId={process.env.REACT_APP_CLIENT_ID}
             render={(renderProps) => (
-              <Button className={classes.googleButton} style={{ backgroundColor: "#0062ff", color: "#fff" }} fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
+              <Button
+                className={classes.googleButton}
+                style={{ backgroundColor: "#0062ff", color: "#fff" }}
+                fullWidth
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                startIcon={<Icon />}
+                variant="contained"
+              >
                 Google Sign In
               </Button>
             )}
