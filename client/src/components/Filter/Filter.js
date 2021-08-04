@@ -34,10 +34,12 @@ const Filter = () => {
   });
 
   useEffect(() => {
+    // eslint-disable-next-line
     if (filters.location.City == "" && filters.location.State == "" && filters.jobTitle == "" && filters.jobType.length === 0) {
       dispatch(getJobs());
       window.history.pushState({}, "", "/jobs");
     } else if (filters.jobType.length || filters.jobTitle || filters.location.City || filters.location.State) handleFilter();
+    // eslint-disable-next-line
   }, [filters.jobType.length, filters.jobTitle, filters.location.City, filters.location.State]);
 
   const MyAutocomplete = withStyles({

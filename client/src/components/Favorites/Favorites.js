@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { TextField, Grid, Button, Typography, IconButton } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Grid, Typography, IconButton } from "@material-ui/core";
 import { Dialog, DialogTitle, DialogContent } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import { getFavoriteJobs, getJobs } from "../../actions/jobs";
 import Jobs from "./../Jobs/jobs";
 
 const Favorites = ({ openFavoritePopup, setOpenFavoritePopup }) => {
+
   const dispatch = useDispatch();
   const classes = useStyles();
-  const history = useHistory();
-  useEffect(() => {
+
+  useEffect(() => {// eslint-disable-next-line
     if (openFavoritePopup == true) dispatch(getFavoriteJobs());
-    else dispatch(getJobs());
+    else dispatch(getJobs());// eslint-disable-next-line
   }, [openFavoritePopup]);
+
   return (
     <Dialog open={openFavoritePopup} maxWidth="lg" classes={{ paper: classes.dialogWrapper }}>
       <Grid container>

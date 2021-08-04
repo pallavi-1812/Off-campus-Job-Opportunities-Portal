@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Grid, IconButton, Tooltip } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './styles';
-import { useHistory } from 'react-router';
 import { getJobs, getJobsBySearchText } from '../../actions/jobs';
 import ChipInput from 'material-ui-chip-input';
 
@@ -23,6 +22,7 @@ const SearchBar = () => {
 
     useEffect(() => {
         handleSearch();
+        // eslint-disable-next-line
     }, [search]);
 
     const handleOpen = () => {
@@ -46,6 +46,7 @@ const SearchBar = () => {
     }
 
     const handleSearch = () => {
+        // eslint-disable-next-line
         if (search.length != 0) {
             dispatch(getJobsBySearchText({ search: search.join(',') }));
             window.history.pushState({}, "", `/jobs/searchByText?searchText=${search.join(',')}`);

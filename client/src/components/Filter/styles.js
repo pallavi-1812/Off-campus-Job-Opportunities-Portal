@@ -12,13 +12,6 @@ export default makeStyles((theme) => ({
       backgroundColor: "#fff",
     }
   },
-  sliderGrid: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    height: "50%",
-    justifyContent: "center",
-  },
   filterDiv: {
     backgroundColor: "#fff",
     display: "flex",

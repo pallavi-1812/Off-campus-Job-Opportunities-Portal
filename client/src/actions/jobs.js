@@ -77,7 +77,6 @@ export const deleteJob = (id) => async (dispatch) => {
 };
 export const likeJob = (id) => async (dispatch) => {
   try {
-    console.log(id);
     const { data } = await api.likeJob(id);
     dispatch({ type: LIKE, payload: data });
   } catch (error) {

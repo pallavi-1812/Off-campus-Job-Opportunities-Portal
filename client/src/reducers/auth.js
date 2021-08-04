@@ -1,4 +1,5 @@
 import { AUTH, LOGOUT } from "../constants/actionTypes";
+
 const authReducer = (state = { authDta: null }, action) => {
   switch (action.type) {
     case AUTH:
@@ -11,4 +12,5 @@ const authReducer = (state = { authDta: null }, action) => {
       return state;
   }
 };
+
 export default authReducer;

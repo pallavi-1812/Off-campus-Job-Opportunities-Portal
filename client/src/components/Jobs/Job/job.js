@@ -19,6 +19,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   const Favorites = () => {
     if (job.favorites.length > 0) {
       return job.favorites.find((favorite) => favorite === (user?.result?.googleId || user?.result?._id)) ? (
@@ -37,11 +38,12 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
       </>
     );
   };
-  console.log(job.description.ReqSkills.split(","));
+
   const handleClick = () => {
     setCurrentId(job._id);
     setOpenPopup(true);
   };
+
   return (
     <Card className={classes.card} raised elevation={6}>
       <CardContent className={classes.cardContent}>
@@ -68,8 +70,8 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
           </Grid>
           <Grid item xs={12}>
             <Typography variant="subtitle1" display="inline" className={classes.title}>
-              {job.jobType && job.jobType.map((item) => (
-                <Chip size="small" label={item} style={{ marginRight: "3px", backgroundColor: "#d1e1fb", color: "#0062ff" }} />
+              {job.jobType && job.jobType.map((item, i) => (
+                <Chip key={i} size="small" label={item} style={{ marginRight: "3px", backgroundColor: "#d1e1fb", color: "#0062ff" }} />
               ))}
             </Typography>
           </Grid>
@@ -82,7 +84,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
             <Grid item xs={12} lg={6}>
               {job.startDate && (
                 <Typography style={{ color: "#808080" }} variant="subtitle1" display="inline" className={classes.title}>
-                  Start Date: {moment(job.startDate).format("DD-MM-YYYY")}
+                  Start Date: {moment(new Date(job.startDate)).format("DD-MM-YYYY")}
                 </Typography>
               )}
             </Grid>
@@ -105,9 +107,11 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
           </Grid>
           <Grid className={classes.icons}>
             <Tooltip title="Save">
-              <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
-                <Favorites />
-              </IconButton>
+              <span>
+                <IconButton className={classes.expand} color="secondary" disabled={!user?.result} onClick={() => dispatch(likeJob(job._id))}>
+                  <Favorites />
+                </IconButton>
+              </span>
             </Tooltip>
             {openFavoritePopup === false && user?.result?.role === "1" && (
               <Tooltip title="Edit">
@@ -144,9 +148,11 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
             </Button>
           </Grid>
           <Grid className={classes.icons}>
-            <IconButton className={classes.expand} color="secondary" disabled={!user?.result}>
-              <BookmarkBorderOutlinedIcon />
-            </IconButton>
+            <span>
+              <IconButton className={classes.expand} color="secondary" disabled={!user?.result}>
+                <BookmarkBorderOutlinedIcon />
+              </IconButton>
+            </span>
             {user?.result?.role === "1" && (
               <IconButton className={classes.expand} style={{ color: "#0062ff" }}>
                 <EditIcon fontSize="small" />
@@ -176,8 +182,8 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
             <>
               <Typography variant="h6" style={{ fontWeight: "500" }}>Required Skills</Typography>
               <Typography paragraph style={{ color: "#808080" }}>
-                {job.description.ReqSkills.split(",").map((item) => (
-                  <Chip size="small" label={item} style={{ marginRight: "3px", backgroundColor: "#d1e1fb", color: "#0062ff" }} />
+                {job.description.ReqSkills.split(",").map((item, i) => (
+                  <Chip key={i} size="small" label={item} style={{ marginRight: "3px", backgroundColor: "#d1e1fb", color: "#0062ff" }} />
                 ))}
               </Typography>
             </>}

@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Grid, CircularProgress } from "@material-ui/core";
-
 import Job from "./Job/job";
 import useStyles from "./styles";
 
@@ -9,9 +8,11 @@ const Jobs = ({ setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) => {
   const { jobs, isLoading } = useSelector((state) => {
     return state.jobs;
   });
-  console.log(jobs);
+
   const classes = useStyles();
+
   if (!jobs.length && !isLoading) return "No Posts";
+
   return isLoading ? (
     <Grid className={classes.loading}>
       <CircularProgress />

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
 import { LOGOUT } from "../../../constants/actionTypes";
 import { withStyles } from "@material-ui/core/styles";
-import { Menu, MenuItem, ListItem, ListItemIcon, ListItemText, Button, IconButton, Avatar } from "@material-ui/core";
+import { Menu, MenuItem, ListItemIcon, ListItemText, Button, IconButton, Avatar } from "@material-ui/core";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import useStyles from "./styles";
@@ -59,7 +59,7 @@ const RightMenu = () => {
         logout();
       }
     }
-    setUser(JSON.parse(localStorage.getItem("profile")));
+    setUser(JSON.parse(localStorage.getItem("profile")));// eslint-disable-next-line
   }, [location]);
 
   return (

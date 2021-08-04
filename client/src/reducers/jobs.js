@@ -1,6 +1,6 @@
 import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH, START_LOADING, END_LOADING, FETCH_BY_SEARCH_TEXT, FETCH_FAVORITES } from "../constants/actionTypes";
 
-export default (state = { isLoading: true, jobs: [] }, action) => {
+const JobReducer = (state = { isLoading: true, jobs: [] }, action) => {
   switch (action.type) {
     case START_LOADING:
       return { ...state, isLoading: true };
@@ -29,3 +29,5 @@ export default (state = { isLoading: true, jobs: [] }, action) => {
       return state;
   }
 };
+
+export default JobReducer;
