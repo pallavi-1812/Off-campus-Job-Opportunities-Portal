@@ -37,7 +37,7 @@ export default makeStyles((theme) => ({
     width: "70vw",
     top: theme.spacing(2),
     [theme.breakpoints.down("md")]: {
-      width: "90vw",
+      width: "95vw",
     },
   },
   dialogTitle: {

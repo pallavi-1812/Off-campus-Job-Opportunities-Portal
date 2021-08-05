@@ -17,7 +17,7 @@ export default makeStyles((theme) => ({
     margin: theme.spacing(0.1),
   },
   paper: {
-    padding: '0',
+    padding: "0",
   },
   form: {
     display: "flex",
@@ -41,6 +41,9 @@ export default makeStyles((theme) => ({
     position: "absolute",
     maxHeight: "90vh",
     top: theme.spacing(2),
+    [theme.breakpoints.down("sm")]: {
+      width: "95vw",
+    },
   },
   dialogTitle: {
     paddingRight: theme.spacing(1),
