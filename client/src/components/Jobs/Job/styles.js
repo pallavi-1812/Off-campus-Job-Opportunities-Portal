@@ -12,14 +12,15 @@ export default makeStyles((theme) => ({
   },
   icons: {
     marginLeft: 'auto !important',
-    [theme.breakpoints.down(300)]: {
+    [theme.breakpoints.down(350)]: {
       marginRight: "auto",
     }
   },
   applyBtn: {
     marginLeft: '0.5rem !important',
-    [theme.breakpoints.down(300)]: {
+    [theme.breakpoints.down(350)]: {
       marginLeft: "auto",
+      marginBottom: "0.5rem"
     }
   },
   expand: {
@@ -34,13 +35,7 @@ export default makeStyles((theme) => ({
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
-    }),
-    [theme.breakpoints.down(350)]: {
-      padding: "0.3rem 0.5rem"
-    },
-    [theme.breakpoints.down(300)]: {
-      padding: "0.3rem 0.3rem",
-    }
+    })
   },
   expandOpen: {
     transform: "rotate(180deg)",
@@ -74,8 +69,9 @@ export default makeStyles((theme) => ({
     display: "flex",
     alignItems: "right",
     paddingRight: "0.5rem",
-    [theme.breakpoints.down(300)]: {
-      flexDirection: "column"
+    [theme.breakpoints.down(350)]: {
+      flexDirection: "column",
+      alignItems: "center"
     }
   },
   cardAction: {
