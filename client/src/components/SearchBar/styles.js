@@ -19,6 +19,9 @@ export default makeStyles((theme) => ({
         },
         "& .MuiChip-deleteIcon": {
             fill: "#ffffff"
+        },
+        [theme.breakpoints.down("sm")]: {
+            paddingBottom: "1rem"
         }
     },
     chipInput: {

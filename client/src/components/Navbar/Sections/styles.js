@@ -12,7 +12,10 @@ export default makeStyles((theme) => ({
     },
     "&:focus": {
       backgroundColor: "#1473e7",
-    }
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "0.5rem 0.2rem"
+    },
   },
   paper: {
     marginRight: theme.spacing(2),
