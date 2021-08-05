@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { Autocomplete } from "@material-ui/lab";
 import { withStyles } from "@material-ui/core/styles";
 import { data } from "../../resources/cityData";
-
 import { jobTypeData } from "../../resources/jobTypeData";
 import { jobs } from "../../resources/jobData";
 import { Grid, TextField, Tooltip, Typography } from "@material-ui/core";
@@ -15,18 +14,6 @@ const Filter = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const text = () => {
-    return (
-      <p>
-        Make sure that
-        <br /> the search bar is empty
-        <br /> before using filters
-      </p>
-    );
-  };
-
-  const [tooltipText, setTooltipText] = useState(text);
-  const [open, setOpen] = useState(false);
   const [filters, setFilters] = useState({
     jobType: [],
     jobTitle: "",
@@ -38,19 +25,13 @@ const Filter = () => {
     startDate: null,
   });
 
-  useEffect(() => {
-    // eslint-disable-next-line
-    if (filters.location.City == "" && filters.location.State == "" && filters.jobTitle == "" && filters.jobType.length === 0) {
-      dispatch(getJobs());
-      window.history.pushState({}, "", "/jobs");
-    } else if (filters.jobType.length || filters.jobTitle || filters.location.City || filters.location.State) handleFilter();
-    // eslint-disable-next-line
-  }, [filters.jobType.length, filters.jobTitle, filters.location.City, filters.location.State]);
-
-  data.sort(function (a, b) {
-    return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
-  });
-
+  const LightTooltip = withStyles((theme) => ({
+    tooltip: {
+      backgroundColor: "#d1e1fb",
+      color: '#0062ff',
+      boxShadow: theme.shadows[1],
+    },
+  }))(Tooltip);
   const MyAutocomplete = withStyles({
     tag: {
       backgroundColor: "#0062ff",
@@ -66,17 +47,18 @@ const Filter = () => {
     },
   })(Autocomplete);
 
-  const handleOpen = () => {
-    setOpen(true);
-    setTimeout(() => {
-      setOpen(false);
-      setTooltipText("");
-    }, 5000);
-  };
+  useEffect(() => {
+    // eslint-disable-next-line
+    if (filters.location.City == "" && filters.location.State == "" && filters.jobTitle == "" && filters.jobType.length === 0) {
+      dispatch(getJobs());
+      window.history.pushState({}, "", "/jobs");
+    } else if (filters.jobType.length || filters.jobTitle || filters.location.City || filters.location.State) handleFilter();
+    // eslint-disable-next-line
+  }, [filters.jobType.length, filters.jobTitle, filters.location.City, filters.location.State]);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  data.sort(function (a, b) {
+    return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+  });
 
   const handleFilter = () => {
     dispatch(
@@ -92,11 +74,11 @@ const Filter = () => {
 
   return (
     <Grid className={classes.filterDiv}>
-      <Tooltip placement="right-start" open={open} onClose={handleClose} onOpen={handleOpen} title={tooltipText}>
+      <LightTooltip placement="right-start" title={<p>Please use either filters <br />or search bar. Don't use<br /> them simultaneously.</p>}>
         <Typography variant="h5" style={{ fontWeight: "530" }}>
           Browse Category
         </Typography>
-      </Tooltip>
+      </LightTooltip>
       <Grid className={classes.itemDiv}>
         <MyAutocomplete
           size="small"
