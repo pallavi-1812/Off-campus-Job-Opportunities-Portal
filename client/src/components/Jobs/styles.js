@@ -13,6 +13,14 @@ export default makeStyles((theme) => ({
       marginLeft: "20px",
     },
   },
+  noPosts: {
+    padding: "1rem",
+    color: "#0062ff",
+    display: "flex",
+    height: "50vh",
+    alignItems: "center",
+    justifyContent: "center"
+  },
   loading: {
     display: "flex",
     flexDirection: "column",

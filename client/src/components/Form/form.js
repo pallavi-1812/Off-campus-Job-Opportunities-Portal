@@ -141,7 +141,6 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                       onChange={(e, v) => {
                         if (v == null) setJobData({ ...jobData, jobTitle: "" });
                         else setJobData({ ...jobData, jobTitle: v.name });
-                        console.log(jobData.jobTitle);
                       }}
                       renderInput={(params) => (
                         <TextField {...params} onChange={({ target }) => setJobData({ ...jobData, jobTitle: target.value })} variant="outlined" name="jobProfile" label="Job Profile" />

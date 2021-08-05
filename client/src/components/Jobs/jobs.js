@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Grid, CircularProgress } from "@material-ui/core";
+import { Grid, CircularProgress, Typography } from "@material-ui/core";
 
 import Job from "./Job/job";
 import useStyles from "./styles";
@@ -12,7 +12,11 @@ const Jobs = ({ setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) => {
 
   const classes = useStyles();
 
-  if (!jobs.length && !isLoading) return "No Posts";
+  if (!jobs.length && !isLoading) return (
+    <Grid className={classes.noPosts}>
+      <Typography variant="h5" style={{ fontWeight: "500", fontSize: "2rem" }}>No Posts</Typography>
+    </Grid>
+  );
 
   return isLoading ? (
     <Grid className={classes.loading}>
