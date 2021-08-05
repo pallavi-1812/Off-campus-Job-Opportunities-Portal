@@ -36,7 +36,7 @@ const Home = () => {
         </>
       )}
       {user?.result && user.result.role === "0" && (
-        <Fab size="medium" color="secondary" style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: "100" }}>
+        <Fab size="medium" color="secondary" style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: "100" }} onClick={() => setOpenFavoritePopup(true)}>
           <BookmarkOutlinedIcon />
         </Fab>
       )}
