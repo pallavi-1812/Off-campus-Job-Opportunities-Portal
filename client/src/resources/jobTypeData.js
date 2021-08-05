@@ -1,1 +1,1 @@
-export const jobTypeData = ["Part Time", "Full Time", "Internships", "Remote"];
+export const jobTypeData = ["Part Time", "Full Time", "Internship", "Remote"];

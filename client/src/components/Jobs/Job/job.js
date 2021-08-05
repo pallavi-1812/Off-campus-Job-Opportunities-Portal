@@ -190,7 +190,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
           )}
           {job.description.Info && (
             <>
-              <Typography variant="h6" style={{ fontWeight: "500" }}>
+              <Typography variant="h6" style={{ fontWeight: "500", marginTop: "0.7rem" }}>
                 Description
               </Typography>
               <Typography paragraph style={{ color: "#808080" }}>
