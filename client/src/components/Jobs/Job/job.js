@@ -100,7 +100,7 @@ const Job = ({ job, setCurrentId, openPopup, setOpenPopup, openFavoritePopup }) 
       {openPopup === false ? (
         <CardActions className={classes.cardActions}>
           <Grid className={classes.applyBtn}>
-            <Button className={classes.expand} style={{ backgroundColor: "#0062ff", color: "#fff" }} variant="contained" href={job.applyLink}>
+            <Button className={classes.apply} style={{ backgroundColor: "#0062ff", color: "#fff" }} variant="contained" href={job.applyLink}>
               Apply
             </Button>
           </Grid>
