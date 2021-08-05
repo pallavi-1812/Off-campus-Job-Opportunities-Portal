@@ -101,7 +101,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
               </Typography>
             </div>
           </DialogTitle>
-          <DialogContent dividers>
+          <DialogContent className={classes.dialogContent} dividers>
             <Job job={jobData} />
           </DialogContent>
         </Grid>
@@ -123,7 +123,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
               </IconButton>
             </div>
           </DialogTitle>
-          <DialogContent dividers>
+          <DialogContent className={classes.dialogContent} dividers>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
               <>
                 <Grid container alignItems="stretch" spacing={1}>

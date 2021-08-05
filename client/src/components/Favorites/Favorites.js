@@ -38,7 +38,7 @@ const Favorites = ({ openFavoritePopup, setOpenFavoritePopup }) => {
               </IconButton>
             </div>
           </DialogTitle>
-          <DialogContent dividers style={{ paddingTop: "0" }}>
+          <DialogContent className={classes.dialogContent} dividers>
             <Jobs openFavoritePopup={openFavoritePopup} openPopup={false} />
           </DialogContent>
         </Grid>

@@ -43,4 +43,10 @@ export default makeStyles((theme) => ({
   dialogTitle: {
     paddingRight: theme.spacing(1),
   },
+  dialogContent: {
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "5px",
+      paddingRight: "5px",
+    },
+  },
 }));

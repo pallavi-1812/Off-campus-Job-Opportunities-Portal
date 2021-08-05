@@ -14,10 +14,10 @@ export default makeStyles((theme) => ({
     },
   },
   loading: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh'
-  }
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "50vh",
+  },
 }));
