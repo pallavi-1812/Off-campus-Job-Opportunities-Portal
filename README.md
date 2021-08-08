@@ -8,6 +8,18 @@
 - Use search box for searching jobs/internships by entering any keyword!
 - Create an account to bookmark your preferred choices and view them anytime!
 
+### Features
+
+- Admin - can create, update, delete and save job posts.
+- User - can save job posts.
+- Guest - can only view.
+
+Filters and Search bar can be used by all of the above.
+
+- Filters - 4 types of filters can be applied: Job Type, Job Title, State and City. They can be applied one at a time or all at once. Filters have autocomplete functionality and have a list options available for each of them. User can select multiple fields in Job Type for filtering.
+
+- Search Bar - uses Full Text Search to search for a single or multiple words in the job posts.
+
 ## A sneak peek into what we have here!
 
 Visit our website at: https://job-finder-123.netlify.app/jobs
