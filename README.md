@@ -22,7 +22,7 @@ Filters and Search bar can be used by all of the above.
 
 ## A sneak peek into what we have here!
 
-Visit our website at: https://job-finder-123.netlify.app/jobs
+Visit our website at: https://job-finder-123.netlify.app
 
 ### Home Page
 
