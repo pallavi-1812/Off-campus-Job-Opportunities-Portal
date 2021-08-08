@@ -143,7 +143,7 @@ const Form = ({ openPopup, currentId, setOpenPopup, setCurrentId }) => {
                         else setJobData({ ...jobData, jobTitle: v.name });
                       }}
                       renderInput={(params) => (
-                        <TextField {...params} onChange={({ target }) => setJobData({ ...jobData, jobTitle: target.value })} variant="outlined" name="jobProfile" label="Job Profile" />
+                        <TextField {...params} onChange={({ target }) => setJobData({ ...jobData, jobTitle: target.value })} variant="outlined" name="jobTitle" label="Job Title" />
                       )}
                     />
                   </Grid>
