@@ -14,23 +14,43 @@ Visit our website at: https://job-finder-123.netlify.app/jobs
 
 ### Home Page
 
-<img src="ReadmeAssets/logo.png" width="50" height="50">
+<img src="ReadmeAssets/Screenshot (1144).png" width="50" height="50">
 
 ### Admin Page
 
-<img src="ReadmeAssets/logo.png" width="50" height="50">
+<img src="ReadmeAssets/Screenshot (1146).png" width="50" height="50">
+
+### Expanded Job Post
+
+<img src="ReadmeAssets/Screenshot (1147).png" width="50" height="50">
 
 ### User Page
 
-<img src="ReadmeAssets/logo.png" width="50" height="50">
+<img src="ReadmeAssets/Screenshot (1152).png" width="50" height="50">
 
-### Home Page after using Filters
+### Sign In Page
 
-<img src="ReadmeAssets/logo.png" width="50" height="50">
+<img src="ReadmeAssets/Screenshot (1153).png" width="50" height="50">
 
-### Home Page after using Search Bar
+### Sign Up Page
 
-<img src="ReadmeAssets/logo.png" width="50" height="50">
+<img src="ReadmeAssets/Screenshot (1154).png" width="50" height="50">
+
+### Using Filters
+
+<img src="ReadmeAssets/Screenshot (1148).png" width="50" height="50">
+
+### Using Search Bar
+
+<img src="ReadmeAssets/Screenshot (1149).png" width="50" height="50">
+
+### Creating Job Post
+
+<img src="ReadmeAssets/Screenshot (1150).png" width="50" height="50">
+
+### Saved Job Posts
+
+<img src="ReadmeAssets/Screenshot (1151).png" width="50" height="50">
 
 ## Technology Stack
 
