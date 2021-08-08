@@ -1,6 +1,6 @@
 # JobFinder
 
-<p align="center"><img src="client/images/logo.png" width="500" height="500"></p>
+<p align="center"><img src="ReadmeAssets/logo.png" width="250" height="250"></p>
 
 ### JobFinder is the one stop solution for checking various internship and job opportunities posted by TPC, IIT Indore.
 
@@ -14,25 +14,29 @@ Visit our website at: https://job-finder-123.netlify.app/jobs
 
 ### Home Page
 
-<img src="client/images/logo.png" width="50" height="50">
+<img src="ReadmeAssets/logo.png" width="50" height="50">
 
 ### Admin Page
 
-<img src="client/images/logo.png" width="50" height="50">
+<img src="ReadmeAssets/logo.png" width="50" height="50">
 
 ### User Page
 
-<img src="client/images/logo.png" width="50" height="50">
+<img src="ReadmeAssets/logo.png" width="50" height="50">
 
 ### Home Page after using Filters
 
-<img src="client/images/logo.png" width="50" height="50">
+<img src="ReadmeAssets/logo.png" width="50" height="50">
+
+### Home Page after using Search Bar
+
+<img src="ReadmeAssets/logo.png" width="50" height="50">
 
 ## Technology Stack
 
 - **Coding Languages**: <img alt="JavaScript" src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/> <img alt="HTML5" src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white"/> <img alt="CSS3" src="https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white"/>
 
-- **Tools & Frameworks**: <img alt="NodeJS" src="https://img.shields.io/badge/node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white"/> <img alt="Express.js" src="https://img.shields.io/badge/express.js%20-%23404d59.svg?&style=for-the-badge"/> <img alt="MongoDB" src ="https://img.shields.io/badge/MongoDB-%234ea94b.svg?&style=for-the-badge&logo=mongodb&logoColor=white"/> <img alt="Mongoose" src ="https://img.shields.io/badge/Mongoose-%234ea94b.svg?&style=for-the-badge&logo=Mongoose&logoColor=white"/> <img alt="EJS template engine" src="https://img.shields.io/badge/EJS template engine%20-%23039BE5.svg?&style=for-the-badge&logo=EJStemplateengine"/>
+- **Tools & Frameworks**: <img alt="NodeJS" src="https://img.shields.io/badge/node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white"/> <img alt="Express.js" src="https://img.shields.io/badge/express.js%20-%23404d59.svg?&style=for-the-badge"/> <img alt="MongoDB" src ="https://img.shields.io/badge/MongoDB-%234ea94b.svg?&style=for-the-badge&logo=mongodb&logoColor=white"/> <img alt="Mongoose" src ="https://img.shields.io/badge/Mongoose-%234ea94b.svg?&style=for-the-badge&logo=Mongoose&logoColor=white"/>
 
 - **Project Management Tools**: <img alt="GitHub" src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/> <img alt="Git" src="https://img.shields.io/badge/git%20-%23F05033.svg?&style=for-the-badge&logo=git&logoColor=white"/>
 
