@@ -1,6 +1,6 @@
 # JobFinder
 
-<p align="center"><img src="ReadmeAssets/logo.png" width="250" height="250"></p>
+<p align="center"><img src="ReadmeAssets/logo.png" width="150" height="150"></p>
 
 ### JobFinder is the one stop solution for checking various internship and job opportunities posted by TPC, IIT Indore.
 
